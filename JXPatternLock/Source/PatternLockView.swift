@@ -62,7 +62,8 @@ public protocol PatternLockViewDelegate: AnyObject {
     func shouldShowErrorBeforeConnectCompleted(_ lockView: PatternLockView) -> Bool
     func connectDidCompleted(_ lockView: PatternLockView)
 }
-
+//TODO:是否显示connectLine
+//TODO:示例添加链接时震动
 open class PatternLockView: UIView {
     public weak var delegate: PatternLockViewDelegate?
     /// 单位秒

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+//TODO:是否显示connectLine
 open class PatternLockPathView: PatternLockView {
     
     public override init(config: PatternLockViewConfig) {
