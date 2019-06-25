@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		194EF4F322C25E9100B0309F /* PatternLockPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194EF4F222C25E9100B0309F /* PatternLockPathView.swift */; };
 		195C3DA722BD102000521461 /* JXPatternLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 195C3DA522BD102000521461 /* JXPatternLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		195C3DAF22BD106200521461 /* PatternLockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195C3DAE22BD106200521461 /* PatternLockView.swift */; };
 		19E72A0022C0D640008ACDA0 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E729FF22C0D640008ACDA0 /* GridView.swift */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		194EF4F222C25E9100B0309F /* PatternLockPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternLockPathView.swift; sourceTree = "<group>"; };
 		195C3DA222BD102000521461 /* JXPatternLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JXPatternLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		195C3DA522BD102000521461 /* JXPatternLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JXPatternLock.h; sourceTree = "<group>"; };
 		195C3DA622BD102000521461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				19E72A0122C1CD0C008ACDA0 /* GridConfig.swift */,
 				19E729FF22C0D640008ACDA0 /* GridView.swift */,
 				19E72A0322C1E733008ACDA0 /* ConnectLineView.swift */,
+				194EF4F222C25E9100B0309F /* PatternLockPathView.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 			files = (
 				19E72A0222C1CD0C008ACDA0 /* GridConfig.swift in Sources */,
 				19E72A0422C1E733008ACDA0 /* ConnectLineView.swift in Sources */,
+				194EF4F322C25E9100B0309F /* PatternLockPathView.swift in Sources */,
 				19E72A0022C0D640008ACDA0 /* GridView.swift in Sources */,
 				195C3DAF22BD106200521461 /* PatternLockView.swift in Sources */,
 			);

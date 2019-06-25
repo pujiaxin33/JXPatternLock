@@ -13,8 +13,8 @@ open class ConnectLineView: UIView, ConnectLine {
     public var lineErrorColor: UIColor = UIColor.red
     public let line: CAShapeLayer = CAShapeLayer()
     private var currentPoint: CGPoint?
-    private var connectedGridViews: [PatternLockGrid]?
-    public var isTriangleHidden: Bool = false {
+    private lazy var connectedGridViews: [PatternLockGrid] = { [PatternLockGrid]() }()
+    public var isTriangleHidden: Bool = true {
         didSet {
             triangles.forEach { $0.isHidden = isTriangleHidden }
         }
@@ -62,22 +62,27 @@ open class ConnectLineView: UIView, ConnectLine {
         CATransaction.commit()
     }
 
-    public func appendPoint(_ point: CGPoint, connectedGridViews: [PatternLockGrid]) {
+    public func addGrid(_ grid: PatternLockGrid) {
+        connectedGridViews.append(grid)
+        drawLine()
+    }
+
+    public func addPoint(_ point: CGPoint) {
         currentPoint = point
-        self.connectedGridViews = connectedGridViews
         drawLine()
     }
 
     public func reset() {
         currentPoint = nil
         line.path = nil
+        connectedGridViews.removeAll()
         triangles.forEach { $0.removeFromSuperlayer() }
         triangles.removeAll()
         setStatus(.normal)
     }
 
     func drawLine() {
-        guard connectedGridViews?.isEmpty == false else {
+        guard connectedGridViews.isEmpty == false else {
             return
         }
         if !isTriangleHidden {
@@ -85,18 +90,18 @@ open class ConnectLineView: UIView, ConnectLine {
             triangles.removeAll()
         }
         let path = UIBezierPath()
-        for (index, gridView) in connectedGridViews!.enumerated() {
+        for (index, gridView) in connectedGridViews.enumerated() {
             if index == 0 {
                 path.move(to: gridView.center)
             }else {
                 path.addLine(to: gridView.center)
             }
             if !isTriangleHidden {
-                if connectedGridViews!.count - 1 == index && currentPoint != nil {
+                if connectedGridViews.count - 1 == index && currentPoint != nil {
                     //最后一个
                     addTriangle(from: gridView.center, to: currentPoint!)
-                }else if connectedGridViews!.count > index + 1  {
-                    let nextGridView = connectedGridViews![index + 1]
+                }else if connectedGridViews.count > index + 1  {
+                    let nextGridView = connectedGridViews[index + 1]
                     addTriangle(from: gridView.center, to: nextGridView.center)
                 }
             }

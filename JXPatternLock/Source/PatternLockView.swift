@@ -24,10 +24,6 @@ public struct Matrix: Equatable {
         }
         return false
     }
-
-    public func identifier() -> String {
-        return "\(row)\(column)"
-    }
 }
 
 public enum GridStatus {
@@ -49,7 +45,8 @@ public protocol PatternLockGrid: UIView {
 
 public protocol ConnectLine: UIView {
     func setStatus(_ status: ConnectLineStatus)
-    func appendPoint(_ point: CGPoint, connectedGridViews: [PatternLockGrid])
+    func addGrid(_ grid: PatternLockGrid)
+    func addPoint(_ point: CGPoint)
     func reset()
 }
 
@@ -71,9 +68,9 @@ open class PatternLockView: UIView {
     /// 单位秒
     public var errorDisplayDuration: TimeInterval = 0.25
     /// 强引用，请勿让持有PatternLockView的类遵从PatternLockViewConfig，这会造成循环引用。请使用一个单独的类来遵从PatternLockViewConfig协议。
-    private let config: PatternLockViewConfig
-    private lazy var gridViews: [PatternLockGrid] = { [PatternLockGrid]() }()
-    private lazy var connectedGridViews: [PatternLockGrid] = { [PatternLockGrid]() }()
+    public let config: PatternLockViewConfig
+    internal lazy var gridViews: [PatternLockGrid] = { [PatternLockGrid]() }()
+    internal lazy var connectedGridViews: [PatternLockGrid] = { [PatternLockGrid]() }()
     private var isTaskDelaying = false
 
     public init(config: PatternLockViewConfig) {
@@ -141,14 +138,15 @@ open class PatternLockView: UIView {
     private func touchesDidChanged(_ touches: Set<UITouch>) {
         if isTaskDelaying {
             NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(connectDidCompleted), object: nil)
-            resetStatus()
-            isTaskDelaying = false
+//            resetStatus()
+//            isTaskDelaying = false
+            connectDidCompleted()
         }
 
         guard let point = touches.randomElement()?.location(in: self) else {
             return
         }
-        config.connectLine.appendPoint(point, connectedGridViews: connectedGridViews)
+        config.connectLine.addPoint(point)
         var currentGridView: PatternLockGrid?
         for gridView in gridViews {
             if gridView.frame.contains(point) {
@@ -168,6 +166,7 @@ open class PatternLockView: UIView {
         }
         if !isContain {
             connectedGridViews.append(currentGridView!)
+            config.connectLine.addGrid(currentGridView!)
             currentGridView?.setStatus(.connect)
             delegate?.locakView(self, didConnectedGrid: currentGridView!)
         }

@@ -15,6 +15,12 @@ func colorWithRGBA(r: Int, g: Int, b: Int, a: CGFloat) -> UIColor {
 
 class ViewController: UITableViewController {
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        navigationController?.navigationBar.isTranslucent = false
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         var title = ""
@@ -44,6 +50,7 @@ class ViewController: UITableViewController {
             lineView.lineErrorColor = UIColor.red
             lineView.triangleNormalColor = colorWithRGBA(r: 18, g: 143, b: 235, a: 1)
             lineView.triangleErrorColor = UIColor.red
+            lineView.isTriangleHidden = false
             lineView.line.lineWidth = 3
             config.connectLine = lineView
 
