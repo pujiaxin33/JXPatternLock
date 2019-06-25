@@ -9,35 +9,52 @@
 import UIKit
 import JXPatternLock
 
-class ViewController: UIViewController, PatternLockViewDelegate {
-    var lockView: PatternLockView!
+func colorWithRGBA(r: Int, g: Int, b: Int, a: CGFloat) -> UIColor {
+    return UIColor(red: CGFloat(r)/255, green: CGFloat(g)/255, blue: CGFloat(b)/255, alpha: a)
+}
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let config = GridConfig()
-        config.gridSize = CGSize(width: 100, height: 100)
-        lockView = PatternLockView(config: config)
-        lockView.delegate = self
-        view.addSubview(lockView)
+class ViewController: UITableViewController {
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        var title = ""
+        for view in cell!.contentView.subviews {
+            if let label = view as? UILabel {
+                title = label.text!
+                break
+            }
+        }
+        switch title {
+        case "仿支付宝":
+            let config = GridConfig()
+            config.gridSize = CGSize(width: 50, height: 50)
+            config.matrix = Matrix(row: 3, column: 3)
+            config.gridViewClosure = {(matrix) -> PatternLockGrid in
+                let gridView = GridView()
+                let outerStrokeLineWidthStatus = RoundPropertyStatus<CGFloat>.init(normal: 1, connect: 2, error: 2)
+                let outerStrokeColorStatus = RoundPropertyStatus<UIColor>(normal: colorWithRGBA(r: 18, g: 143, b: 235, a: 1), connect: colorWithRGBA(r: 18, g: 143, b: 235, a: 1), error: UIColor.red)
+                gridView.outerRoundConfig = RoundConfig(radius: 36, strokeLineWidthStatus: outerStrokeLineWidthStatus, fillColorStatus: nil, strokeColorStatus: outerStrokeColorStatus)
+                let innerStrokeLineWidthStatus = RoundPropertyStatus<CGFloat>.init(normal: 0, connect: 0, error: 0)
+                let innerFillColorStatus = RoundPropertyStatus<UIColor>(normal: nil, connect: colorWithRGBA(r: 18, g: 143, b: 235, a: 1), error: UIColor.red)
+                gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: innerStrokeLineWidthStatus, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
+                return gridView
+            }
+            let lineView = ConnectLineView()
+            lineView.lineNormalColor = colorWithRGBA(r: 18, g: 143, b: 235, a: 1)
+            lineView.lineErrorColor = UIColor.red
+            lineView.triangleNormalColor = colorWithRGBA(r: 18, g: 143, b: 235, a: 1)
+            lineView.triangleErrorColor = UIColor.red
+            lineView.line.lineWidth = 3
+            config.connectLine = lineView
+
+            let vc = ExampleViewController(config: config)
+            vc.lockViewConfig = { (lockView) in
+                lockView.errorDisplayDuration = 1
+            }
+            self.navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
+        }
     }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        lockView.frame = CGRect(x: 10, y: 200, width: view.bounds.size.width - 20, height: view.bounds.size.width - 20)
-    }
-
-    func locakView(_ lockView: PatternLockView, didConnectedGridAt matrix: Matrix) {
-
-    }
-
-    func shouldShowErrorBeforeConnectCompleted(_ lockView: PatternLockView) -> Bool {
-        return true
-    }
-
-    func connectDidCompleted(_ lockView: PatternLockView) {
-
-    }
-
 }
 

@@ -14,6 +14,7 @@
 		195C3DC722BD108400521461 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 195C3DC522BD108400521461 /* LaunchScreen.storyboard */; };
 		195C3DD422BD114900521461 /* JXPatternLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 195C3DCF22BD112400521461 /* JXPatternLock.framework */; };
 		195C3DD522BD114900521461 /* JXPatternLock.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 195C3DCF22BD112400521461 /* JXPatternLock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		19E72A0622C1F9D9008ACDA0 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E72A0522C1F9D9008ACDA0 /* ExampleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,6 +40,7 @@
 		195C3DC622BD108400521461 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		195C3DC822BD108400521461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		195C3DCF22BD112400521461 /* JXPatternLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JXPatternLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		19E72A0522C1F9D9008ACDA0 /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 			children = (
 				195C3DBC22BD108100521461 /* AppDelegate.swift */,
 				195C3DBE22BD108100521461 /* ViewController.swift */,
+				19E72A0522C1F9D9008ACDA0 /* ExampleViewController.swift */,
 				195C3DC022BD108100521461 /* Main.storyboard */,
 				195C3DC322BD108400521461 /* Assets.xcassets */,
 				195C3DC522BD108400521461 /* LaunchScreen.storyboard */,
@@ -165,6 +168,7 @@
 			files = (
 				195C3DBF22BD108100521461 /* ViewController.swift in Sources */,
 				195C3DBD22BD108100521461 /* AppDelegate.swift in Sources */,
+				19E72A0622C1F9D9008ACDA0 /* ExampleViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

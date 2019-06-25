@@ -8,44 +8,42 @@
 
 import UIKit
 
-public struct ColorConfig {
-    public var normalColor: UIColor?
-    public var connectColor: UIColor?
-    public var errorColor: UIColor?
-    public init(normalColor: UIColor?, connectColor: UIColor?, errorColor: UIColor?) {
-        self.normalColor = normalColor
-        self.connectColor = connectColor
-        self.errorColor = errorColor
+public struct RoundPropertyStatus<T> {
+    public var map: [GridStatus: T] = [GridStatus: T]()
+//    public var normal: T?
+//    public var connect: T?
+//    public var error: T?
+    public init(normal: T?, connect: T?, error: T?) {
+//        self.normal = normal
+//        self.connect = connect
+//        self.error = error
+        map[.normal] = normal
+        map[.connect] = connect
+        map[.error] = error
     }
-    public static var empty: ColorConfig = { ColorConfig.init(normalColor: nil, connectColor: nil, errorColor: nil) }()
 }
 
 public struct RoundConfig {
     public var radius: CGFloat
-    public var strokeLineWidth: CGFloat
-    public var fillColorConfig: ColorConfig
-    public var strokeColorConfig: ColorConfig
-    public init(radius: CGFloat, strokeLineWidth: CGFloat, fillColorConfig: ColorConfig, strokeColorConfig: ColorConfig) {
+    public var strokeLineWidthStatus: RoundPropertyStatus<CGFloat>
+    public var fillColorStatus: RoundPropertyStatus<UIColor>?
+    public var strokeColorStatus: RoundPropertyStatus<UIColor>?
+
+    public init(radius: CGFloat, strokeLineWidthStatus: RoundPropertyStatus<CGFloat>, fillColorStatus: RoundPropertyStatus<UIColor>?, strokeColorStatus: RoundPropertyStatus<UIColor>?) {
         self.radius = radius
-        self.strokeLineWidth = strokeLineWidth
-        self.fillColorConfig = fillColorConfig
-        self.strokeColorConfig = strokeColorConfig
+        self.strokeLineWidthStatus = strokeLineWidthStatus
+        self.fillColorStatus = fillColorStatus
+        self.strokeColorStatus = strokeColorStatus
     }
-//    public var normalFillColor: UIColor
-//    public var connectedFillColor: UIColor
-//    public var errorFillColor: UIColor
-//    public var normalStrokeColor: UIColor
-//    public var connectedStrokeColor: UIColor
-//    public var errorStrokeColor: UIColor
 }
 
-open class GridView: UIView, PatternLockGridView {
+open class GridView: UIView, PatternLockGrid {
+    public var identifier: String = ""
     public var matrix: Matrix = Matrix.zero
-    public var innerRoundConfig: RoundConfig = RoundConfig(radius: 10, strokeLineWidth: 0, fillColorConfig: ColorConfig(normalColor: UIColor.lightGray, connectColor: UIColor.blue, errorColor: UIColor.red), strokeColorConfig: ColorConfig.empty)
-    public var outerRoundConfig: RoundConfig = RoundConfig(radius: 20, strokeLineWidth: 0, fillColorConfig: ColorConfig(normalColor: nil, connectColor: UIColor.blue.withAlphaComponent(0.3), errorColor: UIColor.red.withAlphaComponent(0.3)), strokeColorConfig: ColorConfig.empty)
+    public var innerRoundConfig: RoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: RoundPropertyStatus<CGFloat>.init(normal: 1, connect: nil, error: nil), fillColorStatus: RoundPropertyStatus<UIColor>(normal: UIColor.lightGray, connect: UIColor.blue, error: UIColor.red), strokeColorStatus: nil)
+    public var outerRoundConfig: RoundConfig = RoundConfig(radius: 20, strokeLineWidthStatus: RoundPropertyStatus<CGFloat>.init(normal: 0, connect: nil, error: nil), fillColorStatus: RoundPropertyStatus<UIColor>(normal: nil, connect: UIColor.blue.withAlphaComponent(0.3), error: UIColor.red.withAlphaComponent(0.3)), strokeColorStatus: nil)
     private var innerRound: CAShapeLayer!
     private var outerRound: CAShapeLayer!
-
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,7 +53,6 @@ open class GridView: UIView, PatternLockGridView {
         layer.addSublayer(outerRound)
         innerRound = CAShapeLayer()
         layer.addSublayer(innerRound)
-        setStatus(.normal)
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -81,23 +78,35 @@ open class GridView: UIView, PatternLockGridView {
     public func setStatus(_ status: GridStatus) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
-        switch status {
-        case .normal:
-            innerRound.fillColor = innerRoundConfig.fillColorConfig.normalColor?.cgColor
-            innerRound.strokeColor = innerRoundConfig.strokeColorConfig.normalColor?.cgColor
-            outerRound.fillColor = outerRoundConfig.fillColorConfig.normalColor?.cgColor
-            outerRound.strokeColor = outerRoundConfig.strokeColorConfig.normalColor?.cgColor
-        case .connect:
-            innerRound.fillColor = innerRoundConfig.fillColorConfig.connectColor?.cgColor
-            innerRound.strokeColor = innerRoundConfig.strokeColorConfig.connectColor?.cgColor
-            outerRound.fillColor = outerRoundConfig.fillColorConfig.connectColor?.cgColor
-            outerRound.strokeColor = outerRoundConfig.strokeColorConfig.connectColor?.cgColor
-        case .error:
-            innerRound.fillColor = innerRoundConfig.fillColorConfig.errorColor?.cgColor
-            innerRound.strokeColor = innerRoundConfig.strokeColorConfig.errorColor?.cgColor
-            outerRound.fillColor = outerRoundConfig.fillColorConfig.errorColor?.cgColor
-            outerRound.strokeColor = outerRoundConfig.strokeColorConfig.errorColor?.cgColor
-        }
+        innerRound.lineWidth = innerRoundConfig.strokeLineWidthStatus.map[status] ?? 0
+        innerRound.fillColor = innerRoundConfig.fillColorStatus?.map[status]?.cgColor
+        innerRound.strokeColor = innerRoundConfig.strokeColorStatus?.map[status]?.cgColor
+        outerRound.lineWidth = outerRoundConfig.strokeLineWidthStatus.map[status] ?? 0
+        outerRound.fillColor = outerRoundConfig.fillColorStatus?.map[status]?.cgColor
+        outerRound.strokeColor = outerRoundConfig.strokeColorStatus?.map[status]?.cgColor
+//        switch status {
+//        case .normal:
+//            innerRound.lineWidth = innerRoundConfig.strokeLineWidthStatus.normal ?? 0
+//            innerRound.fillColor = innerRoundConfig.fillColorStatus?.normal?.cgColor
+//            innerRound.strokeColor = innerRoundConfig.strokeColorStatus?.normal?.cgColor
+//            outerRound.lineWidth = outerRoundConfig.strokeLineWidthStatus.normal ?? 0
+//            outerRound.fillColor = outerRoundConfig.fillColorStatus?.normal?.cgColor
+//            outerRound.strokeColor = outerRoundConfig.strokeColorStatus?.normal?.cgColor
+//        case .connect:
+//            innerRound.lineWidth = innerRoundConfig.strokeLineWidthStatus.connect ?? 0
+//            innerRound.fillColor = innerRoundConfig.fillColorStatus?.connect?.cgColor
+//            innerRound.strokeColor = innerRoundConfig.strokeColorStatus?.connect?.cgColor
+//            outerRound.lineWidth = outerRoundConfig.strokeLineWidthStatus.connect ?? 0
+//            outerRound.fillColor = outerRoundConfig.fillColorStatus?.connect?.cgColor
+//            outerRound.strokeColor = outerRoundConfig.strokeColorStatus?.connect?.cgColor
+//        case .error:
+//            innerRound.lineWidth = innerRoundConfig.strokeLineWidthStatus.error ?? 0
+//            innerRound.fillColor = innerRoundConfig.fillColorStatus?.error?.cgColor
+//            innerRound.strokeColor = innerRoundConfig.strokeColorStatus?.error?.cgColor
+//            outerRound.lineWidth = outerRoundConfig.strokeLineWidthStatus.error ?? 0
+//            outerRound.fillColor = outerRoundConfig.fillColorStatus?.error?.cgColor
+//            outerRound.strokeColor = outerRoundConfig.strokeColorStatus?.error?.cgColor
+//        }
         CATransaction.commit()
     }
 }

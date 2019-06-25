@@ -11,6 +11,12 @@ import UIKit
 public struct Matrix: Equatable {
     let row: Int
     let column: Int
+    public static var zero: Matrix { return Matrix(row: 0, column: 0) }
+
+    public init(row: Int, column: Int) {
+        self.row = row
+        self.column = column
+    }
 
     public static func == (lhs: Matrix, rhs: Matrix) -> Bool {
         if lhs.row == rhs.row && lhs.column == rhs.column {
@@ -19,11 +25,8 @@ public struct Matrix: Equatable {
         return false
     }
 
-    public static var zero: Matrix { return Matrix(row: 0, column: 0) }
-
-    public init(row: Int, column: Int) {
-        self.row = row
-        self.column = column
+    public func identifier() -> String {
+        return "\(row)\(column)"
     }
 }
 
@@ -38,96 +41,84 @@ public enum ConnectLineStatus {
     case error
 }
 
-public protocol PatternLockGridView: UIView {
+public protocol PatternLockGrid: UIView {
     var matrix: Matrix { set get }
+    var identifier: String { set get }
     func setStatus(_ status: GridStatus)
 }
 
 public protocol ConnectLine: UIView {
-    func appendPoint(_ point: CGPoint)
     func setStatus(_ status: ConnectLineStatus)
+    func appendPoint(_ point: CGPoint, connectedGridViews: [PatternLockGrid])
+    func reset()
 }
-
-//typealias PatternLockGridView = PatternLockGrid & UIView
 
 public protocol PatternLockViewConfig {
     var matrix: Matrix { get }
     var gridSize: CGSize { get }
-    func lockView(_ lockView: PatternLockView, gridViewAt matrix: Matrix) -> PatternLockGridView
-    func lineColor(in lockView: PatternLockView) -> UIColor
-    func lineWidth(in lockView: PatternLockView) -> CGFloat
+    var connectLine: ConnectLine { get }
+    var gridViewClosure: (Matrix) -> (PatternLockGrid) { get }
 }
 
 public protocol PatternLockViewDelegate: AnyObject {
-    func locakView(_ lockView: PatternLockView, didConnectedGridAt matrix: Matrix)
+    func locakView(_ lockView: PatternLockView, didConnectedGrid grid: PatternLockGrid)
     func shouldShowErrorBeforeConnectCompleted(_ lockView: PatternLockView) -> Bool
     func connectDidCompleted(_ lockView: PatternLockView)
 }
 
 open class PatternLockView: UIView {
     public weak var delegate: PatternLockViewDelegate?
-    private let matrix: Matrix
-    private let gridSize: CGSize
+    /// 单位秒
+    public var errorDisplayDuration: TimeInterval = 0.25
     /// 强引用，请勿让持有PatternLockView的类遵从PatternLockViewConfig，这会造成循环引用。请使用一个单独的类来遵从PatternLockViewConfig协议。
     private let config: PatternLockViewConfig
-    private lazy var gridViews: [PatternLockGridView] = { [PatternLockGridView]() }()
-    private lazy var connectedGridViews: [PatternLockGridView] = { [PatternLockGridView]() }()
-    private var currentPoint: CGPoint?
-    private lazy var line: CAShapeLayer = { CAShapeLayer() }()
+    private lazy var gridViews: [PatternLockGrid] = { [PatternLockGrid]() }()
+    private lazy var connectedGridViews: [PatternLockGrid] = { [PatternLockGrid]() }()
+    private var isTaskDelaying = false
 
     public init(config: PatternLockViewConfig) {
-        self.matrix = config.matrix
-        self.gridSize = config.gridSize
         self.config = config
         super.init(frame: CGRect.zero)
 
-        for rowIndex in 0..<matrix.row {
-            for columnIndex in 0..<matrix.column {
-                let gridView =  config.lockView(self, gridViewAt: Matrix(row: rowIndex, column: columnIndex))
+        for rowIndex in 0..<config.matrix.row {
+            for columnIndex in 0..<config.matrix.column {
+                let gridView =  config.gridViewClosure(Matrix(row: rowIndex, column: columnIndex))
+                gridView.setStatus(.normal)
                 gridView.matrix = Matrix(row: rowIndex, column: columnIndex)
+                gridView.identifier = "\(gridView.matrix.row * config.matrix.column + gridView.matrix.column)"
                 addSubview(gridView)
                 gridViews.append(gridView)
             }
         }
-        line.strokeColor = config.lineColor(in: self).cgColor
-        line.lineWidth = config.lineWidth(in: self)
-        line.fillColor = nil
-        layer.insertSublayer(line, at: 0)
+
+        config.connectLine.setStatus(.normal)
+        addSubview(config.connectLine)
     }
 
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    open override func willMove(toSuperview newSuperview: UIView?) {
+        if newSuperview == nil {
+            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(connectDidCompleted), object: nil)
+        }
+    }
+
     open override func layoutSubviews() {
         super.layoutSubviews()
 
         var horizantalSpacing: CGFloat = 0
-        if matrix.column > 1 {
-            horizantalSpacing = (bounds.size.width - CGFloat(matrix.column) * gridSize.width)/CGFloat(matrix.column - 1)
+        if config.matrix.column > 1 {
+            horizantalSpacing = (bounds.size.width - CGFloat(config.matrix.column) * config.gridSize.width)/CGFloat(config.matrix.column - 1)
         }
         var verticalSpacing: CGFloat = 0
-        if matrix.row > 1 {
-            verticalSpacing = (bounds.size.width - CGFloat(matrix.row) * gridSize.height)/CGFloat(matrix.row - 1)
+        if config.matrix.row > 1 {
+            verticalSpacing = (bounds.size.width - CGFloat(config.matrix.row) * config.gridSize.height)/CGFloat(config.matrix.row - 1)
         }
         gridViews.forEach { (gridView) in
-            gridView.frame = CGRect(x: CGFloat(gridView.matrix.column) * (horizantalSpacing + gridSize.width), y: CGFloat(gridView.matrix.row) * (verticalSpacing + gridSize.height), width: gridSize.width, height: gridSize.height)
+            gridView.frame = CGRect(x: CGFloat(gridView.matrix.column) * (horizantalSpacing + config.gridSize.width), y: CGFloat(gridView.matrix.row) * (verticalSpacing + config.gridSize.height), width: config.gridSize.width, height: config.gridSize.height)
         }
-    }
-
-    func drawLine() {
-        let path = UIBezierPath()
-        for (index, gridView) in connectedGridViews.enumerated() {
-            if index == 0 {
-                path.move(to: gridView.center)
-            }else {
-                path.addLine(to: gridView.center)
-            }
-        }
-        if currentPoint != nil {
-            path.addLine(to: currentPoint!)
-        }
-        line.path = path.cgPath
     }
 
     //MARK: - Event
@@ -148,12 +139,17 @@ open class PatternLockView: UIView {
     }
 
     private func touchesDidChanged(_ touches: Set<UITouch>) {
+        if isTaskDelaying {
+            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(connectDidCompleted), object: nil)
+            resetStatus()
+            isTaskDelaying = false
+        }
+
         guard let point = touches.randomElement()?.location(in: self) else {
             return
         }
-        currentPoint = point
-        drawLine()
-        var currentGridView: PatternLockGridView?
+        config.connectLine.appendPoint(point, connectedGridViews: connectedGridViews)
+        var currentGridView: PatternLockGrid?
         for gridView in gridViews {
             if gridView.frame.contains(point) {
                 currentGridView = gridView
@@ -173,31 +169,30 @@ open class PatternLockView: UIView {
         if !isContain {
             connectedGridViews.append(currentGridView!)
             currentGridView?.setStatus(.connect)
-            delegate?.locakView(self, didConnectedGridAt: currentGridView!.matrix)
+            delegate?.locakView(self, didConnectedGrid: currentGridView!)
         }
     }
 
     private func touchesDidEnded() {
         if delegate?.shouldShowErrorBeforeConnectCompleted(self) == true {
             connectedGridViews.forEach { $0.setStatus(.error) }
-            CATransaction.begin()
-            CATransaction.setDisableActions(true)
-            line.strokeColor = UIColor.red.cgColor
-            CATransaction.commit()
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
-                self.connectDidCompleted()
-            }
+            config.connectLine.setStatus(.error)
+            isTaskDelaying = true
+            perform(#selector(connectDidCompleted), with: nil, afterDelay: errorDisplayDuration, inModes: [RunLoop.Mode.common])
         }else {
             connectDidCompleted()
         }
     }
 
-    private func connectDidCompleted() {
+    @objc private func connectDidCompleted() {
+        isTaskDelaying = false
+        resetStatus()
+        delegate?.connectDidCompleted(self)
+    }
+
+    private func resetStatus() {
         connectedGridViews.forEach { $0.setStatus(.normal) }
         connectedGridViews.removeAll()
-        currentPoint = nil
-        line.path = nil
-        line.strokeColor = self.config.lineColor(in: self).cgColor
-        delegate?.connectDidCompleted(self)
+        config.connectLine.reset()
     }
 }
