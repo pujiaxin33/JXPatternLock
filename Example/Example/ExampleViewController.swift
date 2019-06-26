@@ -10,15 +10,10 @@ import UIKit
 import JXPatternLock
 
 class ExampleViewController: UIViewController, PatternLockViewDelegate {
-    var lockViewConfig: ((PatternLockView) -> ())?
     private var lockView: PatternLockView!
     private var currentPassword: String = ""
     private let config: GridConfig
     private var pathView: PatternLockPathView?
-
-    deinit {
-        lockViewConfig = nil
-    }
 
     init(config: GridConfig) {
         self.config = config
@@ -36,7 +31,6 @@ class ExampleViewController: UIViewController, PatternLockViewDelegate {
 
         lockView = PatternLockView(config: config)
         lockView.delegate = self
-        lockViewConfig?(lockView)
         view.addSubview(lockView)
 
         let pathConifg = GridConfig()
@@ -52,13 +46,7 @@ class ExampleViewController: UIViewController, PatternLockViewDelegate {
             gridView.innerRoundConfig = RoundConfig(radius: 0, strokeLineWidthStatus: innerStrokeLineWidthStatus, fillColorStatus: nil, strokeColorStatus: nil)
             return gridView
         }
-        let lineView = ConnectLineView()
-        lineView.lineNormalColor = colorWithRGBA(r: 18, g: 143, b: 235, a: 1)
-        lineView.lineErrorColor = UIColor.red
-        lineView.triangleNormalColor = colorWithRGBA(r: 18, g: 143, b: 235, a: 1)
-        lineView.triangleErrorColor = UIColor.red
-        lineView.line.lineWidth = 1
-        pathConifg.connectLine = lineView
+
         pathView = PatternLockPathView(config: pathConifg)
         pathView?.frame = CGRect(x: 100, y: 20, width: 100, height: 100)
         view.addSubview(pathView!)
@@ -67,7 +55,7 @@ class ExampleViewController: UIViewController, PatternLockViewDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        lockView.frame = CGRect(x: 50, y: 300, width: view.bounds.size.width - 100, height: view.bounds.size.width - 100)
+        lockView.frame = CGRect(x: 50, y: 200, width: view.bounds.size.width - 100, height: view.bounds.size.width - 100)
     }
 
     func locakView(_ lockView: PatternLockView, didConnectedGrid grid: PatternLockGrid) {

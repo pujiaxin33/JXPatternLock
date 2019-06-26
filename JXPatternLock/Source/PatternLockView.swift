@@ -37,6 +37,11 @@ public enum ConnectLineStatus {
     case error
 }
 
+public enum ConnectLineHierarchy {
+    case top
+    case bottom
+}
+
 public protocol PatternLockGrid: UIView {
     var matrix: Matrix { set get }
     var identifier: String { set get }
@@ -53,7 +58,9 @@ public protocol ConnectLine: UIView {
 public protocol PatternLockViewConfig {
     var matrix: Matrix { get }
     var gridSize: CGSize { get }
-    var connectLine: ConnectLine { get }
+    var connectLine: ConnectLine? { get }
+    var connectLineHierarchy: ConnectLineHierarchy { get }
+    var errorDisplayDuration: TimeInterval { get }
     var gridViewClosure: (Matrix) -> (PatternLockGrid) { get }
 }
 
@@ -62,13 +69,9 @@ public protocol PatternLockViewDelegate: AnyObject {
     func shouldShowErrorBeforeConnectCompleted(_ lockView: PatternLockView) -> Bool
     func connectDidCompleted(_ lockView: PatternLockView)
 }
-//TODO:是否显示connectLine
-//TODO:示例添加链接时震动
+
 open class PatternLockView: UIView {
     public weak var delegate: PatternLockViewDelegate?
-    /// 单位秒
-    public var errorDisplayDuration: TimeInterval = 0.25
-    /// 强引用，请勿让持有PatternLockView的类遵从PatternLockViewConfig，这会造成循环引用。请使用一个单独的类来遵从PatternLockViewConfig协议。
     public let config: PatternLockViewConfig
     internal lazy var gridViews: [PatternLockGrid] = { [PatternLockGrid]() }()
     internal lazy var connectedGridViews: [PatternLockGrid] = { [PatternLockGrid]() }()
@@ -89,8 +92,14 @@ open class PatternLockView: UIView {
             }
         }
 
-        config.connectLine.setStatus(.normal)
-        addSubview(config.connectLine)
+        if config.connectLine != nil {
+            config.connectLine?.setStatus(.normal)
+            if config.connectLineHierarchy == .top {
+                addSubview(config.connectLine!)
+            }else {
+                insertSubview(config.connectLine!, at: 0)
+            }
+        }
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -139,15 +148,13 @@ open class PatternLockView: UIView {
     private func touchesDidChanged(_ touches: Set<UITouch>) {
         if isTaskDelaying {
             NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(connectDidCompleted), object: nil)
-//            resetStatus()
-//            isTaskDelaying = false
             connectDidCompleted()
         }
 
         guard let point = touches.randomElement()?.location(in: self) else {
             return
         }
-        config.connectLine.addPoint(point)
+        config.connectLine?.addPoint(point)
         var currentGridView: PatternLockGrid?
         for gridView in gridViews {
             if gridView.frame.contains(point) {
@@ -167,7 +174,7 @@ open class PatternLockView: UIView {
         }
         if !isContain {
             connectedGridViews.append(currentGridView!)
-            config.connectLine.addGrid(currentGridView!)
+            config.connectLine?.addGrid(currentGridView!)
             currentGridView?.setStatus(.connect)
             delegate?.locakView(self, didConnectedGrid: currentGridView!)
         }
@@ -176,9 +183,9 @@ open class PatternLockView: UIView {
     private func touchesDidEnded() {
         if delegate?.shouldShowErrorBeforeConnectCompleted(self) == true {
             connectedGridViews.forEach { $0.setStatus(.error) }
-            config.connectLine.setStatus(.error)
+            config.connectLine?.setStatus(.error)
             isTaskDelaying = true
-            perform(#selector(connectDidCompleted), with: nil, afterDelay: errorDisplayDuration, inModes: [RunLoop.Mode.common])
+            perform(#selector(connectDidCompleted), with: nil, afterDelay: config.errorDisplayDuration, inModes: [RunLoop.Mode.common])
         }else {
             connectDidCompleted()
         }
@@ -186,13 +193,9 @@ open class PatternLockView: UIView {
 
     @objc private func connectDidCompleted() {
         isTaskDelaying = false
-        resetStatus()
-        delegate?.connectDidCompleted(self)
-    }
-
-    private func resetStatus() {
         connectedGridViews.forEach { $0.setStatus(.normal) }
         connectedGridViews.removeAll()
-        config.connectLine.reset()
+        config.connectLine?.reset()
+        delegate?.connectDidCompleted(self)
     }
 }

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//TODO:是否显示connectLine
+
 open class PatternLockPathView: PatternLockView {
     
     public override init(config: PatternLockViewConfig) {
@@ -25,7 +25,7 @@ open class PatternLockPathView: PatternLockView {
             if grid.matrix == matrix {
                 grid.setStatus(.connect)
                 connectedGridViews.append(grid)
-                config.connectLine.addGrid(grid)
+                config.connectLine?.addGrid(grid)
                 break
             }
         }
@@ -34,6 +34,6 @@ open class PatternLockPathView: PatternLockView {
     public func reset() {
         connectedGridViews.forEach { $0.setStatus(.normal) }
         connectedGridViews.removeAll()
-        config.connectLine.reset()
+        config.connectLine?.reset()
     }
 }

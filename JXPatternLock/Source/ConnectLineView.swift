@@ -8,19 +8,21 @@
 
 import Foundation
 
+/// 所有的配置项都是静态配置，配置好之后再更新是没有效果的！！！
 open class ConnectLineView: UIView, ConnectLine {
     public var lineNormalColor: UIColor = UIColor.lightGray
     public var lineErrorColor: UIColor = UIColor.red
-    public let line: CAShapeLayer = CAShapeLayer()
-    private var currentPoint: CGPoint?
-    private lazy var connectedGridViews: [PatternLockGrid] = { [PatternLockGrid]() }()
+    public var lineWidth: CGFloat = 3
     public var isTriangleHidden: Bool = true {
         didSet {
-            triangles.forEach { $0.isHidden = isTriangleHidden }
+            if !isTriangleHidden {
+                triangles = [CAShapeLayer]()
+            }
         }
     }
     public var triangleNormalColor: UIColor = UIColor.lightGray
     public var triangleErrorColor: UIColor = UIColor.red
+    /// 距离GridView的中心偏移量
     public var triangleOffset: CGFloat = 20
     //   /\    -
     //  /  \   height
@@ -28,7 +30,11 @@ open class ConnectLineView: UIView, ConnectLine {
     // | width |
     public var triangleHeight: CGFloat = 8
     public var triangleWidth: CGFloat = 15
-    private var triangles: [CAShapeLayer] = [CAShapeLayer]()
+
+    private var currentPoint: CGPoint?
+    private lazy var connectedGridViews: [PatternLockGrid] = { [PatternLockGrid]() }()
+    private var triangles: [CAShapeLayer]?
+    private let line: CAShapeLayer = CAShapeLayer()
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,19 +51,16 @@ open class ConnectLineView: UIView, ConnectLine {
     public func setStatus(_ status: ConnectLineStatus) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
+        line.lineWidth = lineWidth
         switch status {
             case .normal:
                 line.strokeColor = lineNormalColor.cgColor
-                if !isTriangleHidden {
-                    triangles.forEach { $0.fillColor = triangleNormalColor.cgColor }
-                }
+                triangles?.forEach { $0.fillColor = triangleNormalColor.cgColor }
             case .error:
                 currentPoint = nil
                 drawLine()
                 line.strokeColor = lineErrorColor.cgColor
-                if !isTriangleHidden {
-                    triangles.forEach { $0.fillColor = triangleErrorColor.cgColor }
-                }
+                triangles?.forEach { $0.fillColor = triangleErrorColor.cgColor }
         }
         CATransaction.commit()
     }
@@ -76,8 +79,8 @@ open class ConnectLineView: UIView, ConnectLine {
         currentPoint = nil
         line.path = nil
         connectedGridViews.removeAll()
-        triangles.forEach { $0.removeFromSuperlayer() }
-        triangles.removeAll()
+        triangles?.forEach { $0.removeFromSuperlayer() }
+        triangles?.removeAll()
         setStatus(.normal)
     }
 
@@ -85,10 +88,8 @@ open class ConnectLineView: UIView, ConnectLine {
         guard connectedGridViews.isEmpty == false else {
             return
         }
-        if !isTriangleHidden {
-            triangles.forEach { $0.removeFromSuperlayer() }
-            triangles.removeAll()
-        }
+        triangles?.forEach { $0.removeFromSuperlayer() }
+        triangles?.removeAll()
         let path = UIBezierPath()
         for (index, gridView) in connectedGridViews.enumerated() {
             if index == 0 {
@@ -131,6 +132,6 @@ open class ConnectLineView: UIView, ConnectLine {
         let degress = atan2(yDistance, xDistance)
         triangle.setAffineTransform(CGAffineTransform(rotationAngle: degress))
         layer.addSublayer(triangle)
-        triangles.append(triangle)
+        triangles?.append(triangle)
     }
 }
