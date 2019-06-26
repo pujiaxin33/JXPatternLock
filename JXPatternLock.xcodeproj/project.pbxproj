@@ -7,23 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		194EF4F322C25E9100B0309F /* PatternLockPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194EF4F222C25E9100B0309F /* PatternLockPathView.swift */; };
+		19182EB722C3347C00389985 /* PatternLockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182EB222C3347C00389985 /* PatternLockView.swift */; };
+		19182EB822C3347C00389985 /* LockConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182EB322C3347C00389985 /* LockConfig.swift */; };
+		19182EB922C3347C00389985 /* ConnectLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182EB422C3347C00389985 /* ConnectLineView.swift */; };
+		19182EBA22C3347C00389985 /* PatternLockPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182EB522C3347C00389985 /* PatternLockPathView.swift */; };
+		19182EBB22C3347C00389985 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182EB622C3347C00389985 /* GridView.swift */; };
 		195C3DA722BD102000521461 /* JXPatternLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 195C3DA522BD102000521461 /* JXPatternLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		195C3DAF22BD106200521461 /* PatternLockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195C3DAE22BD106200521461 /* PatternLockView.swift */; };
-		19E72A0022C0D640008ACDA0 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E729FF22C0D640008ACDA0 /* GridView.swift */; };
-		19E72A0222C1CD0C008ACDA0 /* GridConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E72A0122C1CD0C008ACDA0 /* GridConfig.swift */; };
-		19E72A0422C1E733008ACDA0 /* ConnectLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E72A0322C1E733008ACDA0 /* ConnectLineView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		194EF4F222C25E9100B0309F /* PatternLockPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternLockPathView.swift; sourceTree = "<group>"; };
+		19182EB222C3347C00389985 /* PatternLockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternLockView.swift; sourceTree = "<group>"; };
+		19182EB322C3347C00389985 /* LockConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockConfig.swift; sourceTree = "<group>"; };
+		19182EB422C3347C00389985 /* ConnectLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectLineView.swift; sourceTree = "<group>"; };
+		19182EB522C3347C00389985 /* PatternLockPathView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternLockPathView.swift; sourceTree = "<group>"; };
+		19182EB622C3347C00389985 /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		195C3DA222BD102000521461 /* JXPatternLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JXPatternLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		195C3DA522BD102000521461 /* JXPatternLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JXPatternLock.h; sourceTree = "<group>"; };
 		195C3DA622BD102000521461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		195C3DAE22BD106200521461 /* PatternLockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternLockView.swift; sourceTree = "<group>"; };
-		19E729FF22C0D640008ACDA0 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
-		19E72A0122C1CD0C008ACDA0 /* GridConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridConfig.swift; sourceTree = "<group>"; };
-		19E72A0322C1E733008ACDA0 /* ConnectLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectLineView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +37,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19182EB122C3347C00389985 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				19182EB222C3347C00389985 /* PatternLockView.swift */,
+				19182EB322C3347C00389985 /* LockConfig.swift */,
+				19182EB422C3347C00389985 /* ConnectLineView.swift */,
+				19182EB522C3347C00389985 /* PatternLockPathView.swift */,
+				19182EB622C3347C00389985 /* GridView.swift */,
+			);
+			path = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
 		195C3D9822BD102000521461 = {
 			isa = PBXGroup;
 			children = (
@@ -56,23 +68,11 @@
 		195C3DA422BD102000521461 /* JXPatternLock */ = {
 			isa = PBXGroup;
 			children = (
-				195C3DAD22BD103500521461 /* Source */,
+				19182EB122C3347C00389985 /* Sources */,
 				195C3DA522BD102000521461 /* JXPatternLock.h */,
 				195C3DA622BD102000521461 /* Info.plist */,
 			);
 			path = JXPatternLock;
-			sourceTree = "<group>";
-		};
-		195C3DAD22BD103500521461 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				195C3DAE22BD106200521461 /* PatternLockView.swift */,
-				19E72A0122C1CD0C008ACDA0 /* GridConfig.swift */,
-				19E729FF22C0D640008ACDA0 /* GridView.swift */,
-				19E72A0322C1E733008ACDA0 /* ConnectLineView.swift */,
-				194EF4F222C25E9100B0309F /* PatternLockPathView.swift */,
-			);
-			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,11 +154,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19E72A0222C1CD0C008ACDA0 /* GridConfig.swift in Sources */,
-				19E72A0422C1E733008ACDA0 /* ConnectLineView.swift in Sources */,
-				194EF4F322C25E9100B0309F /* PatternLockPathView.swift in Sources */,
-				19E72A0022C0D640008ACDA0 /* GridView.swift in Sources */,
-				195C3DAF22BD106200521461 /* PatternLockView.swift in Sources */,
+				19182EB922C3347C00389985 /* ConnectLineView.swift in Sources */,
+				19182EB722C3347C00389985 /* PatternLockView.swift in Sources */,
+				19182EB822C3347C00389985 /* LockConfig.swift in Sources */,
+				19182EBB22C3347C00389985 /* GridView.swift in Sources */,
+				19182EBA22C3347C00389985 /* PatternLockPathView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

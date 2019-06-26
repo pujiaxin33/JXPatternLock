@@ -61,18 +61,18 @@ public protocol PatternLockViewConfig {
     var connectLine: ConnectLine? { get }
     var connectLineHierarchy: ConnectLineHierarchy { get }
     var errorDisplayDuration: TimeInterval { get }
-    var gridViewClosure: (Matrix) -> (PatternLockGrid) { get }
+    var initGridClosure: (Matrix) -> (PatternLockGrid) { get }
 }
 
 public protocol PatternLockViewDelegate: AnyObject {
-    func locakView(_ lockView: PatternLockView, didConnectedGrid grid: PatternLockGrid)
-    func shouldShowErrorBeforeConnectCompleted(_ lockView: PatternLockView) -> Bool
-    func connectDidCompleted(_ lockView: PatternLockView)
+    func lockView(_ lockView: PatternLockView, didConnectedGrid grid: PatternLockGrid)
+    func lockViewShouldShowErrorBeforeConnectCompleted(_ lockView: PatternLockView) -> Bool
+    func lockViewDidConnectCompleted(_ lockView: PatternLockView)
 }
 
 open class PatternLockView: UIView {
     public weak var delegate: PatternLockViewDelegate?
-    public let config: PatternLockViewConfig
+    internal let config: PatternLockViewConfig
     internal lazy var gridViews: [PatternLockGrid] = { [PatternLockGrid]() }()
     internal lazy var connectedGridViews: [PatternLockGrid] = { [PatternLockGrid]() }()
     private var isTaskDelaying = false
@@ -83,7 +83,7 @@ open class PatternLockView: UIView {
 
         for rowIndex in 0..<config.matrix.row {
             for columnIndex in 0..<config.matrix.column {
-                let gridView =  config.gridViewClosure(Matrix(row: rowIndex, column: columnIndex))
+                let gridView =  config.initGridClosure(Matrix(row: rowIndex, column: columnIndex))
                 gridView.setStatus(.normal)
                 gridView.matrix = Matrix(row: rowIndex, column: columnIndex)
                 gridView.identifier = "\(gridView.matrix.row * config.matrix.column + gridView.matrix.column)"
@@ -108,7 +108,7 @@ open class PatternLockView: UIView {
 
     open override func willMove(toSuperview newSuperview: UIView?) {
         if newSuperview == nil {
-            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(connectDidCompleted), object: nil)
+            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(didConnectCompleted), object: nil)
         }
     }
 
@@ -147,8 +147,8 @@ open class PatternLockView: UIView {
 
     private func touchesDidChanged(_ touches: Set<UITouch>) {
         if isTaskDelaying {
-            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(connectDidCompleted), object: nil)
-            connectDidCompleted()
+            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(didConnectCompleted), object: nil)
+            didConnectCompleted()
         }
 
         guard let point = touches.randomElement()?.location(in: self) else {
@@ -176,26 +176,26 @@ open class PatternLockView: UIView {
             connectedGridViews.append(currentGridView!)
             config.connectLine?.addGrid(currentGridView!)
             currentGridView?.setStatus(.connect)
-            delegate?.locakView(self, didConnectedGrid: currentGridView!)
+            delegate?.lockView(self, didConnectedGrid: currentGridView!)
         }
     }
 
     private func touchesDidEnded() {
-        if delegate?.shouldShowErrorBeforeConnectCompleted(self) == true {
+        if delegate?.lockViewShouldShowErrorBeforeConnectCompleted(self) == true {
             connectedGridViews.forEach { $0.setStatus(.error) }
             config.connectLine?.setStatus(.error)
             isTaskDelaying = true
-            perform(#selector(connectDidCompleted), with: nil, afterDelay: config.errorDisplayDuration, inModes: [RunLoop.Mode.common])
+            perform(#selector(didConnectCompleted), with: nil, afterDelay: config.errorDisplayDuration, inModes: [RunLoop.Mode.common])
         }else {
-            connectDidCompleted()
+            didConnectCompleted()
         }
     }
 
-    @objc private func connectDidCompleted() {
+    @objc private func didConnectCompleted() {
         isTaskDelaying = false
         connectedGridViews.forEach { $0.setStatus(.normal) }
         connectedGridViews.removeAll()
         config.connectLine?.reset()
-        delegate?.connectDidCompleted(self)
+        delegate?.lockViewDidConnectCompleted(self)
     }
 }

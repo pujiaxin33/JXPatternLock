@@ -32,11 +32,11 @@ class ViewController: UITableViewController {
         }
         switch title {
         case "仿支付宝":
-            let config = GridConfig()
+            let config = LockConfig()
             config.gridSize = CGSize(width: 50, height: 50)
             config.matrix = Matrix(row: 3, column: 3)
             config.errorDisplayDuration = 1
-            config.gridViewClosure = {(matrix) -> PatternLockGrid in
+            config.initGridClosure = {(matrix) -> PatternLockGrid in
                 let gridView = GridView()
                 let outerStrokeLineWidthStatus = RoundPropertyStatus<CGFloat>.init(normal: 1, connect: 2, error: 2)
                 let outerStrokeColorStatus = RoundPropertyStatus<UIColor>(normal: colorWithRGBA(r: 18, g: 143, b: 235, a: 1), connect: colorWithRGBA(r: 18, g: 143, b: 235, a: 1), error: UIColor.red)
@@ -58,10 +58,10 @@ class ViewController: UITableViewController {
             let vc = ExampleViewController(config: config)
             self.navigationController?.pushViewController(vc, animated: true)
         case "Grid Example 2":
-            let config = GridConfig()
+            let config = LockConfig()
             config.gridSize = CGSize(width: 50, height: 50)
             config.matrix = Matrix(row: 3, column: 3)
-            config.gridViewClosure = {(matrix) -> PatternLockGrid in
+            config.initGridClosure = {(matrix) -> PatternLockGrid in
                 let gridView = GridView()
                 let outerFillColorStatus = RoundPropertyStatus<UIColor>(normal: nil, connect: colorWithRGBA(r: 18, g: 143, b: 235, a: 1).withAlphaComponent(0.3), error: UIColor.red.withAlphaComponent(0.3))
                 gridView.outerRoundConfig = RoundConfig(radius: 36, strokeLineWidthStatus: nil, fillColorStatus: outerFillColorStatus, strokeColorStatus: nil)

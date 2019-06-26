@@ -8,14 +8,15 @@
 
 import UIKit
 import JXPatternLock
+import Security
 
 class ExampleViewController: UIViewController, PatternLockViewDelegate {
     private var lockView: PatternLockView!
     private var currentPassword: String = ""
-    private let config: GridConfig
+    private let config: LockConfig
     private var pathView: PatternLockPathView?
 
-    init(config: GridConfig) {
+    init(config: LockConfig) {
         self.config = config
         super.init(nibName: nil, bundle: nil)
     }
@@ -33,10 +34,10 @@ class ExampleViewController: UIViewController, PatternLockViewDelegate {
         lockView.delegate = self
         view.addSubview(lockView)
 
-        let pathConifg = GridConfig()
+        let pathConifg = LockConfig()
         pathConifg.gridSize = CGSize(width: 15, height: 15)
         pathConifg.matrix = Matrix(row: 3, column: 3)
-        pathConifg.gridViewClosure = {(matrix) -> PatternLockGrid in
+        pathConifg.initGridClosure = {(matrix) -> PatternLockGrid in
             let gridView = GridView()
             let outerStrokeLineWidthStatus = RoundPropertyStatus<CGFloat>.init(normal: 1, connect: 1, error: 1)
             let outerStrokeColorStatus = RoundPropertyStatus<UIColor>(normal: colorWithRGBA(r: 18, g: 143, b: 235, a: 1), connect: colorWithRGBA(r: 18, g: 143, b: 235, a: 1), error: UIColor.red)
@@ -58,16 +59,16 @@ class ExampleViewController: UIViewController, PatternLockViewDelegate {
         lockView.frame = CGRect(x: 50, y: 200, width: view.bounds.size.width - 100, height: view.bounds.size.width - 100)
     }
 
-    func locakView(_ lockView: PatternLockView, didConnectedGrid grid: PatternLockGrid) {
+    func lockView(_ lockView: PatternLockView, didConnectedGrid grid: PatternLockGrid) {
         currentPassword.append(grid.identifier)
         pathView?.addGrid(at: grid.matrix)
     }
 
-    func shouldShowErrorBeforeConnectCompleted(_ lockView: PatternLockView) -> Bool {
+    func lockViewShouldShowErrorBeforeConnectCompleted(_ lockView: PatternLockView) -> Bool {
         return true
     }
 
-    func connectDidCompleted(_ lockView: PatternLockView) {
+    func lockViewDidConnectCompleted(_ lockView: PatternLockView) {
         print(currentPassword)
         currentPassword = ""
     }
