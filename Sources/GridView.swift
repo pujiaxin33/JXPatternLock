@@ -8,28 +8,18 @@
 
 import UIKit
 
-/// 不同的状态显示不同的参数
-public struct RoundPropertyStatus<T> {
-    public var map: [GridStatus: T] = [GridStatus: T]()
-    public init(normal: T?, connect: T?, error: T?) {
-        map[.normal] = normal
-        map[.connect] = connect
-        map[.error] = error
-    }
-}
-
 /// 圆的配置：
 /// 不想要的配置设置为nil即可。
 /// 比如不显示内圆时，把radius设置nil即可。
 /// 不显示圆的strokeLine时，把strokeLineWidthStatus设置为你能即可。
-/// fillColor更精细的配置示例：normal状态不显示，connect状态显示blue，error状态显示red。代码为：`RoundPropertyStatus<UIColor>.init(normal: nil, connect: .blue, error: .red)`
+/// fillColor更精细的配置示例：normal状态不显示，connect状态显示blue，error状态显示red。代码为：`GridPropertyStatus<UIColor>.init(normal: nil, connect: .blue, error: .red)`
 public struct RoundConfig {
     public var radius: CGFloat?
-    public var strokeLineWidthStatus: RoundPropertyStatus<CGFloat>?
-    public var fillColorStatus: RoundPropertyStatus<UIColor>?
-    public var strokeColorStatus: RoundPropertyStatus<UIColor>?
+    public var strokeLineWidthStatus: GridPropertyStatus<CGFloat>?
+    public var fillColorStatus: GridPropertyStatus<UIColor>?
+    public var strokeColorStatus: GridPropertyStatus<UIColor>?
 
-    public init(radius: CGFloat?, strokeLineWidthStatus: RoundPropertyStatus<CGFloat>?, fillColorStatus: RoundPropertyStatus<UIColor>?, strokeColorStatus: RoundPropertyStatus<UIColor>?) {
+    public init(radius: CGFloat?, strokeLineWidthStatus: GridPropertyStatus<CGFloat>?, fillColorStatus: GridPropertyStatus<UIColor>?, strokeColorStatus: GridPropertyStatus<UIColor>?) {
         self.radius = radius
         self.strokeLineWidthStatus = strokeLineWidthStatus
         self.fillColorStatus = fillColorStatus
@@ -45,8 +35,8 @@ open class GridView: UIView, PatternLockGrid {
     public var matrix: Matrix = Matrix.zero
     public var innerRoundConfig: RoundConfig = RoundConfig.empty
     public var outerRoundConfig: RoundConfig = RoundConfig.empty
-    private let innerRound: CAShapeLayer
-    private let outerRound: CAShapeLayer
+    public let innerRound: CAShapeLayer
+    public let outerRound: CAShapeLayer
 
     public override init(frame: CGRect) {
         outerRound = CAShapeLayer()

@@ -14,13 +14,13 @@ open class LockConfig: PatternLockViewConfig {
     public var matrix: Matrix = Matrix(row: 3, column: 3)
     public var gridSize: CGSize = CGSize(width: 50, height: 50)
     public var connectLine: ConnectLine?
-    public var errorDisplayDuration: TimeInterval = 0.25
+    public var errorDisplayDuration: TimeInterval = 0.5
     public var initGridClosure: (Matrix) -> (PatternLockGrid) = {_ in
         //默认配置
         let gridView = GridView()
-        let outerFillColorStatus = RoundPropertyStatus<UIColor>(normal: nil, connect: UIColor.blue.withAlphaComponent(0.3), error: UIColor.red.withAlphaComponent(0.3))
+        let outerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: UIColor.blue.withAlphaComponent(0.3), error: UIColor.red.withAlphaComponent(0.3))
         gridView.outerRoundConfig = RoundConfig(radius: 36, strokeLineWidthStatus: nil, fillColorStatus: outerFillColorStatus, strokeColorStatus: nil)
-        let innerFillColorStatus = RoundPropertyStatus<UIColor>(normal: UIColor.lightGray, connect: UIColor.blue, error: UIColor.red)
+        let innerFillColorStatus = GridPropertyStatus<UIColor>(normal: UIColor.lightGray, connect: UIColor.blue, error: UIColor.red)
         gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: nil, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
         return gridView
     }

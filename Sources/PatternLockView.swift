@@ -26,6 +26,16 @@ public struct Matrix: Equatable {
     }
 }
 
+/// Grid不同的状态显示不同的参数
+public struct GridPropertyStatus<T> {
+    public var map: [GridStatus: T] = [GridStatus: T]()
+    public init(normal: T?, connect: T?, error: T?) {
+        map[.normal] = normal
+        map[.connect] = connect
+        map[.error] = error
+    }
+}
+
 public enum GridStatus {
     case normal
     case connect

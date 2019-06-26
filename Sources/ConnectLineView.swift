@@ -76,12 +76,15 @@ open class ConnectLineView: UIView, ConnectLine {
     }
 
     public func reset() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
         currentPoint = nil
         line.path = nil
         connectedGridViews.removeAll()
         triangles?.forEach { $0.removeFromSuperlayer() }
         triangles?.removeAll()
         setStatus(.normal)
+        CATransaction.commit()
     }
 
     func drawLine() {

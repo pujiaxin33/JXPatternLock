@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19182EC422C378C800389985 /* jinitaimei.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19182EC322C378C800389985 /* jinitaimei.jpg */; };
 		195C3DBD22BD108100521461 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195C3DBC22BD108100521461 /* AppDelegate.swift */; };
 		195C3DBF22BD108100521461 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195C3DBE22BD108100521461 /* ViewController.swift */; };
 		195C3DC222BD108100521461 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 195C3DC022BD108100521461 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		19182EC322C378C800389985 /* jinitaimei.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = jinitaimei.jpg; path = ../../../../../../Downloads/jinitaimei.jpg; sourceTree = "<group>"; };
 		195C3DB922BD108100521461 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		195C3DBC22BD108100521461 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		195C3DBE22BD108100521461 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,6 +57,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19182EC022C3780E00389985 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				19182EC322C378C800389985 /* jinitaimei.jpg */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
 		195C3DB022BD108100521461 = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +92,7 @@
 				195C3DC322BD108400521461 /* Assets.xcassets */,
 				195C3DC522BD108400521461 /* LaunchScreen.storyboard */,
 				195C3DC822BD108400521461 /* Info.plist */,
+				19182EC022C3780E00389985 /* Image */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -153,6 +164,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19182EC422C378C800389985 /* jinitaimei.jpg in Resources */,
 				195C3DC722BD108400521461 /* LaunchScreen.storyboard in Resources */,
 				195C3DC422BD108400521461 /* Assets.xcassets in Resources */,
 				195C3DC222BD108100521461 /* Main.storyboard in Resources */,

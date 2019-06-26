@@ -12,6 +12,9 @@
 		19182EB922C3347C00389985 /* ConnectLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182EB422C3347C00389985 /* ConnectLineView.swift */; };
 		19182EBA22C3347C00389985 /* PatternLockPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182EB522C3347C00389985 /* PatternLockPathView.swift */; };
 		19182EBB22C3347C00389985 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182EB622C3347C00389985 /* GridView.swift */; };
+		19182EBD22C36D1700389985 /* ShadowGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182EBC22C36D1700389985 /* ShadowGridView.swift */; };
+		19182EBF22C371CC00389985 /* ImageGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182EBE22C371CC00389985 /* ImageGridView.swift */; };
+		19182EC622C3798B00389985 /* RotateImageGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182EC522C3798B00389985 /* RotateImageGridView.swift */; };
 		195C3DA722BD102000521461 /* JXPatternLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 195C3DA522BD102000521461 /* JXPatternLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -21,6 +24,9 @@
 		19182EB422C3347C00389985 /* ConnectLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectLineView.swift; sourceTree = "<group>"; };
 		19182EB522C3347C00389985 /* PatternLockPathView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternLockPathView.swift; sourceTree = "<group>"; };
 		19182EB622C3347C00389985 /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		19182EBC22C36D1700389985 /* ShadowGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowGridView.swift; sourceTree = "<group>"; };
+		19182EBE22C371CC00389985 /* ImageGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridView.swift; sourceTree = "<group>"; };
+		19182EC522C3798B00389985 /* RotateImageGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateImageGridView.swift; sourceTree = "<group>"; };
 		195C3DA222BD102000521461 /* JXPatternLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JXPatternLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		195C3DA522BD102000521461 /* JXPatternLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JXPatternLock.h; sourceTree = "<group>"; };
 		195C3DA622BD102000521461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,6 +51,9 @@
 				19182EB422C3347C00389985 /* ConnectLineView.swift */,
 				19182EB522C3347C00389985 /* PatternLockPathView.swift */,
 				19182EB622C3347C00389985 /* GridView.swift */,
+				19182EBC22C36D1700389985 /* ShadowGridView.swift */,
+				19182EBE22C371CC00389985 /* ImageGridView.swift */,
+				19182EC522C3798B00389985 /* RotateImageGridView.swift */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -158,7 +167,10 @@
 				19182EB722C3347C00389985 /* PatternLockView.swift in Sources */,
 				19182EB822C3347C00389985 /* LockConfig.swift in Sources */,
 				19182EBB22C3347C00389985 /* GridView.swift in Sources */,
+				19182EBF22C371CC00389985 /* ImageGridView.swift in Sources */,
+				19182EBD22C36D1700389985 /* ShadowGridView.swift in Sources */,
 				19182EBA22C3347C00389985 /* PatternLockPathView.swift in Sources */,
+				19182EC622C3798B00389985 /* RotateImageGridView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
