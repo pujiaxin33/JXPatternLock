@@ -37,7 +37,7 @@ open class ImageLineView: UIView, ConnectLine {
         drawLine()
     }
 
-    public func addPoint(_ point: CGPoint) {
+    public func setCurrentPoint(_ point: CGPoint) {
         currenPoint = point
         drawLine()
     }

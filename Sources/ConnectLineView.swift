@@ -10,8 +10,7 @@ import Foundation
 
 /// 所有的配置项都是静态配置，配置好之后再更新是没有效果的！！！
 open class ConnectLineView: UIView, ConnectLine {
-    public var lineNormalColor: UIColor = UIColor.lightGray
-    public var lineErrorColor: UIColor = UIColor.red
+    public var lineColorStatus: ConnectLinePropertyStatus<UIColor> = .init(normal: .lightGray, error: .red)
     public var lineWidth: CGFloat = 3
     // lineColor和lineWidth通过上面属性配置，比如lineJoin、lineDashPattern等属性，通过该闭包自定义
     public var lineOtherConfig: ((CAShapeLayer) -> ())? {
@@ -26,8 +25,7 @@ open class ConnectLineView: UIView, ConnectLine {
             }
         }
     }
-    public var triangleNormalColor: UIColor = UIColor.lightGray
-    public var triangleErrorColor: UIColor = UIColor.red
+    public var triangleColorStatus: ConnectLinePropertyStatus<UIColor> = .init(normal: .lightGray, error: .red)
     /// 距离GridView的中心偏移量
     public var triangleOffset: CGFloat = 20
     //   /\    -
@@ -41,6 +39,7 @@ open class ConnectLineView: UIView, ConnectLine {
     private lazy var connectedGrids: [PatternLockGrid] = { [PatternLockGrid]() }()
     private var triangles: [CAShapeLayer]?
     private let line: CAShapeLayer = CAShapeLayer()
+    private var currentStatus = ConnectLineStatus.normal
 
     deinit {
         lineOtherConfig = nil
@@ -61,18 +60,15 @@ open class ConnectLineView: UIView, ConnectLine {
     }
 
     open func setStatus(_ status: ConnectLineStatus) {
+        currentStatus = status
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         line.lineWidth = lineWidth
-        switch status {
-            case .normal:
-                line.strokeColor = lineNormalColor.cgColor
-                triangles?.forEach { $0.fillColor = triangleNormalColor.cgColor }
-            case .error:
-                currentPoint = nil
-                drawLine()
-                line.strokeColor = lineErrorColor.cgColor
-                triangles?.forEach { $0.fillColor = triangleErrorColor.cgColor }
+        line.strokeColor = lineColorStatus.map[status]?.cgColor
+        triangles?.forEach { $0.fillColor = triangleColorStatus.map[status]?.cgColor }
+        if status == .error {
+            currentPoint = nil
+            drawLine()
         }
         CATransaction.commit()
     }
@@ -82,7 +78,7 @@ open class ConnectLineView: UIView, ConnectLine {
         drawLine()
     }
 
-    open func addPoint(_ point: CGPoint) {
+    open func setCurrentPoint(_ point: CGPoint) {
         currentPoint = point
         drawLine()
     }
@@ -90,6 +86,7 @@ open class ConnectLineView: UIView, ConnectLine {
     open func reset() {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
+        currentStatus = .normal
         currentPoint = nil
         line.path = nil
         connectedGrids.removeAll()
@@ -140,7 +137,7 @@ open class ConnectLineView: UIView, ConnectLine {
         triangle.path = trianglePath.cgPath
         triangle.anchorPoint = CGPoint(x: 0, y: 0.5)
         triangle.frame.origin.x -= triangle.bounds.width/2
-        triangle.fillColor = triangleNormalColor.cgColor
+        triangle.fillColor = triangleColorStatus.map[currentStatus]?.cgColor
 
         let xDistance = to.x - from.x
         let yDistance = to.y - from.y

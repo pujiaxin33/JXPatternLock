@@ -48,10 +48,8 @@ class ViewController: UITableViewController {
                 return gridView
             }
             let lineView = ConnectLineView()
-            lineView.lineNormalColor = tintColor
-            lineView.lineErrorColor = .red
-            lineView.triangleNormalColor = tintColor
-            lineView.triangleErrorColor = .red
+            lineView.lineColorStatus = .init(normal: tintColor, error: .red)
+            lineView.triangleColorStatus = .init(normal: tintColor, error: .red)
             lineView.isTriangleHidden = false
             lineView.lineWidth = 3
             config.connectLine = lineView
@@ -73,8 +71,7 @@ class ViewController: UITableViewController {
                 return gridView
             }
             let lineView = ConnectLineView()
-            lineView.lineNormalColor = colorWithRGBA(r: 18, g: 143, b: 235, a: 1)
-            lineView.lineErrorColor = .red
+            lineView.lineColorStatus = .init(normal: colorWithRGBA(r: 18, g: 143, b: 235, a: 1), error: .red)
             lineView.lineWidth = 3
             config.connectLine = lineView
 
@@ -95,8 +92,7 @@ class ViewController: UITableViewController {
                 return gridView
             }
             let lineView = ConnectLineView()
-            lineView.lineNormalColor = .white
-            lineView.lineErrorColor = .red
+            lineView.lineColorStatus = .init(normal: .white, error: .red)
             lineView.lineWidth = 3
             config.connectLine = lineView
 
@@ -121,8 +117,7 @@ class ViewController: UITableViewController {
                 return gridView
             }
             let lineView = ConnectLineView()
-            lineView.lineNormalColor = tintColor
-            lineView.lineErrorColor = .red
+            lineView.lineColorStatus = .init(normal: tintColor, error: .red)
             lineView.lineWidth = 10
             config.connectLine = lineView
 
@@ -147,8 +142,7 @@ class ViewController: UITableViewController {
                 return gridView
             }
             let lineView = ConnectLineView()
-            lineView.lineNormalColor = tintColor
-            lineView.lineErrorColor = .red
+            lineView.lineColorStatus = .init(normal: tintColor, error: .red)
             lineView.lineWidth = 3
             config.connectLine = lineView
 
@@ -172,8 +166,7 @@ class ViewController: UITableViewController {
                 return gridView
             }
             let lineView = ConnectLineView()
-            lineView.lineNormalColor = tintColor
-            lineView.lineErrorColor = .red
+            lineView.lineColorStatus = .init(normal: tintColor, error: .red)
             lineView.lineWidth = 3
             config.connectLine = lineView
 
@@ -193,8 +186,7 @@ class ViewController: UITableViewController {
                 return gridView
             }
             let lineView = ConnectLineView()
-            lineView.lineNormalColor = tintColor
-            lineView.lineErrorColor = .red
+            lineView.lineColorStatus = .init(normal: tintColor, error: .red)
             lineView.lineWidth = 3
             config.connectLine = lineView
 
@@ -214,8 +206,7 @@ class ViewController: UITableViewController {
                 return gridView
             }
             let lineView = ConnectLineView()
-            lineView.lineNormalColor = tintColor
-            lineView.lineErrorColor = .red
+            lineView.lineColorStatus = .init(normal: tintColor, error: .red)
             lineView.lineWidth = 3
             config.connectLine = lineView
 
@@ -240,8 +231,7 @@ class ViewController: UITableViewController {
                 return gridView
             }
             let lineView = ConnectLineView()
-            lineView.lineNormalColor = tintColor
-            lineView.lineErrorColor = .red
+            lineView.lineColorStatus = .init(normal: tintColor, error: .red)
             lineView.lineWidth = 3
             lineView.lineOtherConfig = {(line) in
                 line.lineDashPattern = [NSNumber(value: 5), NSNumber(value: 10)]

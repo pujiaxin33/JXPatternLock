@@ -69,8 +69,8 @@ public protocol PatternLockGrid: UIView {
 
 public protocol ConnectLine: UIView {
     func setStatus(_ status: ConnectLineStatus)
+    func setCurrentPoint(_ point: CGPoint)
     func addGrid(_ grid: PatternLockGrid)
-    func addPoint(_ point: CGPoint)
     func reset()
 }
 
@@ -174,7 +174,7 @@ open class PatternLockView: UIView {
         guard let point = touches.randomElement()?.location(in: self) else {
             return
         }
-        config.connectLine?.addPoint(point)
+        config.connectLine?.setCurrentPoint(point)
         var currentGridView: PatternLockGrid?
         for gridView in gridViews {
             if gridView.frame.contains(point) {
