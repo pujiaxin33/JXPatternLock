@@ -10,6 +10,6 @@ Pod::Spec.new do |s|
   s.swift_version = "5.0"
   s.source       = { :git => "https://github.com/pujiaxin33/JXPatternLock.git", :tag => "#{s.version}" }
   s.framework    = "UIKit"
-  s.source_files  = "Sources", "Sources/*.{swift}"
+  s.source_files  = "Sources", "Sources/**/*.{swift}"
   s.requires_arc = true
 end

@@ -48,11 +48,8 @@
 		19182EB122C3347C00389985 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				19182EB222C3347C00389985 /* PatternLockView.swift */,
-				19182EB322C3347C00389985 /* LockConfig.swift */,
-				19182EB422C3347C00389985 /* ConnectLineView.swift */,
+				19182ED022C4CCF600389985 /* Core */,
 				19182EB522C3347C00389985 /* PatternLockPathView.swift */,
-				19182EB622C3347C00389985 /* GridView.swift */,
 				19182EBC22C36D1700389985 /* ShadowGridView.swift */,
 				19182EBE22C371CC00389985 /* ImageGridView.swift */,
 				19182EC522C3798B00389985 /* RotateImageGridView.swift */,
@@ -60,6 +57,17 @@
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
+		};
+		19182ED022C4CCF600389985 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				19182EB222C3347C00389985 /* PatternLockView.swift */,
+				19182EB322C3347C00389985 /* LockConfig.swift */,
+				19182EB622C3347C00389985 /* GridView.swift */,
+				19182EB422C3347C00389985 /* ConnectLineView.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
 		};
 		195C3D9822BD102000521461 = {
 			isa = PBXGroup;
