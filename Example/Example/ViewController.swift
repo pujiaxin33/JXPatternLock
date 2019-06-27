@@ -31,41 +31,43 @@ class ViewController: UITableViewController {
             }
         }
         switch title {
-        case "仿支付宝":
+        case "箭头":
             let config = LockConfig()
-            config.gridSize = CGSize(width: 50, height: 50)
+            config.gridSize = CGSize(width: 70, height: 70)
             config.matrix = Matrix(row: 3, column: 3)
             config.errorDisplayDuration = 1
+            let tintColor = colorWithRGBA(r: 18, g: 143, b: 235, a: 1)
             config.initGridClosure = {(matrix) -> PatternLockGrid in
                 let gridView = GridView()
                 let outerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 1, connect: 2, error: 2)
-                let outerStrokeColorStatus = GridPropertyStatus<UIColor>(normal: colorWithRGBA(r: 18, g: 143, b: 235, a: 1), connect: colorWithRGBA(r: 18, g: 143, b: 235, a: 1), error: .red)
-                gridView.outerRoundConfig = RoundConfig(radius: 36, strokeLineWidthStatus: outerStrokeLineWidthStatus, fillColorStatus: nil, strokeColorStatus: outerStrokeColorStatus)
+                let outerStrokeColorStatus = GridPropertyStatus<UIColor>(normal: tintColor, connect: tintColor, error: .red)
+                gridView.outerRoundConfig = RoundConfig(radius: 33, strokeLineWidthStatus: outerStrokeLineWidthStatus, fillColorStatus: nil, strokeColorStatus: outerStrokeColorStatus)
                 let innerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 0, connect: 0, error: 0)
-                let innerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: colorWithRGBA(r: 18, g: 143, b: 235, a: 1), error: .red)
+                let innerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: tintColor, error: .red)
                 gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: innerStrokeLineWidthStatus, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
                 return gridView
             }
             let lineView = ConnectLineView()
-            lineView.lineNormalColor = colorWithRGBA(r: 18, g: 143, b: 235, a: 1)
+            lineView.lineNormalColor = tintColor
             lineView.lineErrorColor = .red
-            lineView.triangleNormalColor = colorWithRGBA(r: 18, g: 143, b: 235, a: 1)
+            lineView.triangleNormalColor = tintColor
             lineView.triangleErrorColor = .red
             lineView.isTriangleHidden = false
             lineView.lineWidth = 3
             config.connectLine = lineView
 
             let vc = ExampleViewController(config: config)
+            vc.title = title
             self.navigationController?.pushViewController(vc, animated: true)
 
-        case "Grid Example 2":
+        case "小灰点":
             let config = LockConfig()
-            config.gridSize = CGSize(width: 50, height: 50)
+            config.gridSize = CGSize(width: 70, height: 70)
             config.matrix = Matrix(row: 3, column: 3)
             config.initGridClosure = {(matrix) -> PatternLockGrid in
                 let gridView = GridView()
                 let outerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: colorWithRGBA(r: 18, g: 143, b: 235, a: 0.3), error: UIColor.red.withAlphaComponent(0.3))
-                gridView.outerRoundConfig = RoundConfig(radius: 36, strokeLineWidthStatus: nil, fillColorStatus: outerFillColorStatus, strokeColorStatus: nil)
+                gridView.outerRoundConfig = RoundConfig(radius: 33, strokeLineWidthStatus: nil, fillColorStatus: outerFillColorStatus, strokeColorStatus: nil)
                 let innerFillColorStatus = GridPropertyStatus<UIColor>(normal: .lightGray, connect: colorWithRGBA(r: 18, g: 143, b: 235, a: 1), error: .red)
                 gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: nil, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
                 return gridView
@@ -77,11 +79,12 @@ class ViewController: UITableViewController {
             config.connectLine = lineView
 
             let vc = ExampleViewController(config: config)
+            vc.title = title
             self.navigationController?.pushViewController(vc, animated: true)
 
-        case "Grid Example 3":
+        case "小白点":
             let config = LockConfig()
-            config.gridSize = CGSize(width: 50, height: 50)
+            config.gridSize = CGSize(width: 70, height: 70)
             config.matrix = Matrix(row: 3, column: 3)
             config.initGridClosure = {(matrix) -> PatternLockGrid in
                 let gridView = GridView()
@@ -99,11 +102,38 @@ class ViewController: UITableViewController {
 
             let vc = ExampleViewController(config: config)
             vc.view.backgroundColor = .black
+            vc.title = title
             self.navigationController?.pushViewController(vc, animated: true)
 
-        case "Grid Example 4":
+        case "荧光蓝":
             let config = LockConfig()
-            config.gridSize = CGSize(width: 50, height: 50)
+            config.gridSize = CGSize(width: 70, height: 70)
+            config.matrix = Matrix(row: 3, column: 3)
+            let tintColor = colorWithRGBA(r: 18, g: 106, b: 152, a: 1)
+            config.initGridClosure = {(matrix) -> PatternLockGrid in
+                let gridView = GridView()
+                let outerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: UIColor.black.withAlphaComponent(0.3), error: UIColor.red.withAlphaComponent(0.3))
+                let outerStrokeColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: tintColor, error: .red)
+                let outerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 2, connect: 2, error: 2)
+                gridView.outerRoundConfig = RoundConfig(radius: 33, strokeLineWidthStatus: outerStrokeLineWidthStatus, fillColorStatus: outerFillColorStatus, strokeColorStatus: outerStrokeColorStatus)
+                let innerFillColorStatus = GridPropertyStatus<UIColor>(normal: .white, connect: .white, error: .red)
+                gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: nil, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
+                return gridView
+            }
+            let lineView = ConnectLineView()
+            lineView.lineNormalColor = tintColor
+            lineView.lineErrorColor = .red
+            lineView.lineWidth = 10
+            config.connectLine = lineView
+
+            let vc = ExampleViewController(config: config)
+            vc.view.backgroundColor = .black
+            vc.title = title
+            self.navigationController?.pushViewController(vc, animated: true)
+
+        case "白色Fill":
+            let config = LockConfig()
+            config.gridSize = CGSize(width: 70, height: 70)
             config.matrix = Matrix(row: 3, column: 3)
             let tintColor = colorWithRGBA(r: 118, g: 218, b: 208, a: 1)
             config.initGridClosure = {(matrix) -> PatternLockGrid in
@@ -111,7 +141,7 @@ class ViewController: UITableViewController {
                 let outerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 1, connect: 1, error: 1)
                 let outerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: .white, error: .white)
                 let outerStrokeColorStatus = GridPropertyStatus<UIColor>(normal: .gray, connect: tintColor, error: .red)
-                gridView.outerRoundConfig = RoundConfig(radius: 36, strokeLineWidthStatus: outerStrokeLineWidthStatus, fillColorStatus: outerFillColorStatus, strokeColorStatus: outerStrokeColorStatus)
+                gridView.outerRoundConfig = RoundConfig(radius: 33, strokeLineWidthStatus: outerStrokeLineWidthStatus, fillColorStatus: outerFillColorStatus, strokeColorStatus: outerStrokeColorStatus)
                 let innerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: tintColor, error: .red)
                 gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: nil, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
                 return gridView
@@ -123,11 +153,12 @@ class ViewController: UITableViewController {
             config.connectLine = lineView
 
             let vc = ExampleViewController(config: config)
+            vc.title = title
             self.navigationController?.pushViewController(vc, animated: true)
 
         case "阴影":
             let config = LockConfig()
-            config.gridSize = CGSize(width: 50, height: 50)
+            config.gridSize = CGSize(width: 70, height: 70)
             config.matrix = Matrix(row: 3, column: 3)
             let tintColor = colorWithRGBA(r: 118, g: 218, b: 208, a: 1)
             config.initGridClosure = {(matrix) -> PatternLockGrid in
@@ -135,7 +166,7 @@ class ViewController: UITableViewController {
                 let outerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 1, connect: 1, error: 1)
                 let outerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: .white, error: .white)
                 let outerStrokeColorStatus = GridPropertyStatus<UIColor>(normal: .gray, connect: tintColor, error: .red)
-                gridView.outerRoundConfig = RoundConfig(radius: 36, strokeLineWidthStatus: outerStrokeLineWidthStatus, fillColorStatus: outerFillColorStatus, strokeColorStatus: outerStrokeColorStatus)
+                gridView.outerRoundConfig = RoundConfig(radius: 33, strokeLineWidthStatus: outerStrokeLineWidthStatus, fillColorStatus: outerFillColorStatus, strokeColorStatus: outerStrokeColorStatus)
                 let innerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: tintColor, error: .red)
                 gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: nil, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
                 return gridView
@@ -147,11 +178,12 @@ class ViewController: UITableViewController {
             config.connectLine = lineView
 
             let vc = ExampleViewController(config: config)
+            vc.title = title
             self.navigationController?.pushViewController(vc, animated: true)
 
         case "图片":
             let config = LockConfig()
-            config.gridSize = CGSize(width: 50, height: 50)
+            config.gridSize = CGSize(width: 70, height: 70)
             config.matrix = Matrix(row: 3, column: 3)
             config.errorDisplayDuration = 1
             let tintColor = colorWithRGBA(r: 118, g: 218, b: 208, a: 1)
@@ -167,11 +199,12 @@ class ViewController: UITableViewController {
             config.connectLine = lineView
 
             let vc = ExampleViewController(config: config)
+            vc.title = title
             self.navigationController?.pushViewController(vc, animated: true)
 
         case "旋转":
             let config = LockConfig()
-            config.gridSize = CGSize(width: 50, height: 50)
+            config.gridSize = CGSize(width: 70, height: 70)
             config.matrix = Matrix(row: 3, column: 3)
             config.errorDisplayDuration = 1
             let tintColor = colorWithRGBA(r: 118, g: 218, b: 208, a: 1)
@@ -187,6 +220,84 @@ class ViewController: UITableViewController {
             config.connectLine = lineView
 
             let vc = ExampleViewController(config: config)
+            vc.title = title
+            self.navigationController?.pushViewController(vc, animated: true)
+
+        case "ConnectLineView属性自定义":
+            let config = LockConfig()
+            config.gridSize = CGSize(width: 70, height: 70)
+            config.matrix = Matrix(row: 3, column: 3)
+            config.errorDisplayDuration = 1
+            let tintColor = colorWithRGBA(r: 18, g: 143, b: 235, a: 1)
+            config.initGridClosure = {(matrix) -> PatternLockGrid in
+                let gridView = GridView()
+                let outerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 1, connect: 2, error: 2)
+                let outerStrokeColorStatus = GridPropertyStatus<UIColor>(normal: tintColor, connect: tintColor, error: .red)
+                gridView.outerRoundConfig = RoundConfig(radius: 33, strokeLineWidthStatus: outerStrokeLineWidthStatus, fillColorStatus: nil, strokeColorStatus: outerStrokeColorStatus)
+                let innerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 0, connect: 0, error: 0)
+                let innerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: tintColor, error: .red)
+                gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: innerStrokeLineWidthStatus, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
+                return gridView
+            }
+            let lineView = ConnectLineView()
+            lineView.lineNormalColor = tintColor
+            lineView.lineErrorColor = .red
+            lineView.lineWidth = 3
+            lineView.lineOtherConfig = {(line) in
+                line.lineDashPattern = [NSNumber(value: 5), NSNumber(value: 10)]
+            }
+            config.connectLine = lineView
+
+            let vc = ExampleViewController(config: config)
+            vc.title = title
+            self.navigationController?.pushViewController(vc, animated: true)
+
+        case "ImageLineView(箭头)":
+            let config = LockConfig()
+            config.gridSize = CGSize(width: 70, height: 70)
+            config.matrix = Matrix(row: 3, column: 3)
+            config.errorDisplayDuration = 1
+            config.connectLineHierarchy = .top
+            let tintColor = colorWithRGBA(r: 18, g: 143, b: 235, a: 1)
+            config.initGridClosure = {(matrix) -> PatternLockGrid in
+                let gridView = GridView()
+                let outerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 1, connect: 2, error: 2)
+                let outerStrokeColorStatus = GridPropertyStatus<UIColor>(normal: tintColor, connect: tintColor, error: .red)
+                gridView.outerRoundConfig = RoundConfig(radius: 33, strokeLineWidthStatus: outerStrokeLineWidthStatus, fillColorStatus: nil, strokeColorStatus: outerStrokeColorStatus)
+                let innerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 0, connect: 0, error: 0)
+                let innerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: tintColor, error: .red)
+                gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: innerStrokeLineWidthStatus, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
+                return gridView
+            }
+            let lineView = ImageLineView(imageStatus: .init(normal: UIImage(named: "arrow"), error: UIImage(named: "arrowRed")))
+            config.connectLine = lineView
+
+            let vc = ExampleViewController(config: config)
+            vc.title = title
+            self.navigationController?.pushViewController(vc, animated: true)
+
+        case "ImageLineView(小鱼)":
+            let config = LockConfig()
+            config.gridSize = CGSize(width: 70, height: 70)
+            config.matrix = Matrix(row: 3, column: 3)
+            config.errorDisplayDuration = 1
+            config.connectLineHierarchy = .top
+            let tintColor = colorWithRGBA(r: 18, g: 143, b: 235, a: 1)
+            config.initGridClosure = {(matrix) -> PatternLockGrid in
+                let gridView = GridView()
+                let outerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 1, connect: 2, error: 2)
+                let outerStrokeColorStatus = GridPropertyStatus<UIColor>(normal: tintColor, connect: tintColor, error: .red)
+                gridView.outerRoundConfig = RoundConfig(radius: 33, strokeLineWidthStatus: outerStrokeLineWidthStatus, fillColorStatus: nil, strokeColorStatus: outerStrokeColorStatus)
+                let innerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 0, connect: 0, error: 0)
+                let innerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: tintColor, error: .red)
+                gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: innerStrokeLineWidthStatus, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
+                return gridView
+            }
+            let lineView = ImageLineView(imageStatus: .init(normal: UIImage(named: "fish"), error: UIImage(named: "fishRed")))
+            config.connectLine = lineView
+
+            let vc = ExampleViewController(config: config)
+            vc.title = title
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             break

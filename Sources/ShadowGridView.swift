@@ -14,7 +14,7 @@ open class ShadowGridView: GridView {
     public var shadowOffset: CGSize = CGSize.zero
     public var shadowRadius: CGFloat = 5
 
-    override public func setStatus(_ status: GridStatus) {
+    override open func setStatus(_ status: GridStatus) {
         super.setStatus(status)
 
         outerRound.shadowOffset = shadowOffset

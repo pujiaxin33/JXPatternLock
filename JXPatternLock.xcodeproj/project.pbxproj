@@ -15,6 +15,7 @@
 		19182EBD22C36D1700389985 /* ShadowGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182EBC22C36D1700389985 /* ShadowGridView.swift */; };
 		19182EBF22C371CC00389985 /* ImageGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182EBE22C371CC00389985 /* ImageGridView.swift */; };
 		19182EC622C3798B00389985 /* RotateImageGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182EC522C3798B00389985 /* RotateImageGridView.swift */; };
+		19182ECF22C4C41000389985 /* ImageLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182ECE22C4C40F00389985 /* ImageLineView.swift */; };
 		195C3DA722BD102000521461 /* JXPatternLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 195C3DA522BD102000521461 /* JXPatternLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		19182EBC22C36D1700389985 /* ShadowGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowGridView.swift; sourceTree = "<group>"; };
 		19182EBE22C371CC00389985 /* ImageGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGridView.swift; sourceTree = "<group>"; };
 		19182EC522C3798B00389985 /* RotateImageGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateImageGridView.swift; sourceTree = "<group>"; };
+		19182ECE22C4C40F00389985 /* ImageLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLineView.swift; sourceTree = "<group>"; };
 		195C3DA222BD102000521461 /* JXPatternLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JXPatternLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		195C3DA522BD102000521461 /* JXPatternLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JXPatternLock.h; sourceTree = "<group>"; };
 		195C3DA622BD102000521461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 				19182EBC22C36D1700389985 /* ShadowGridView.swift */,
 				19182EBE22C371CC00389985 /* ImageGridView.swift */,
 				19182EC522C3798B00389985 /* RotateImageGridView.swift */,
+				19182ECE22C4C40F00389985 /* ImageLineView.swift */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -170,6 +173,7 @@
 				19182EBF22C371CC00389985 /* ImageGridView.swift in Sources */,
 				19182EBD22C36D1700389985 /* ShadowGridView.swift in Sources */,
 				19182EBA22C3347C00389985 /* PatternLockPathView.swift in Sources */,
+				19182ECF22C4C41000389985 /* ImageLineView.swift in Sources */,
 				19182EC622C3798B00389985 /* RotateImageGridView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

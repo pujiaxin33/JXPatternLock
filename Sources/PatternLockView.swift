@@ -36,6 +36,15 @@ public struct GridPropertyStatus<T> {
     }
 }
 
+/// ConnectLine不同的状态显示不同的参数
+public struct ConnectLinePropertyStatus<T> {
+    public var map: [ConnectLineStatus: T] = [ConnectLineStatus: T]()
+    public init(normal: T?, error: T?) {
+        map[.normal] = normal
+        map[.error] = error
+    }
+}
+
 public enum GridStatus {
     case normal
     case connect
@@ -136,6 +145,7 @@ open class PatternLockView: UIView {
         gridViews.forEach { (gridView) in
             gridView.frame = CGRect(x: CGFloat(gridView.matrix.column) * (horizantalSpacing + config.gridSize.width), y: CGFloat(gridView.matrix.row) * (verticalSpacing + config.gridSize.height), width: config.gridSize.width, height: config.gridSize.height)
         }
+        config.connectLine?.frame = bounds
     }
 
     //MARK: - Event

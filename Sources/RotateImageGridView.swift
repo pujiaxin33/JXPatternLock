@@ -9,23 +9,23 @@
 import UIKit
 
 open class RotateImageGridView: ImageGridView {
+    public var animationDuration: TimeInterval = 1
 
     public override func setStatus(_ status: GridStatus) {
         super.setStatus(status)
 
         switch status {
         case .normal:
-            print("清除动画")
             imageView.layer.removeAllAnimations()
+            break
         case .connect:
-            print("开启动画")
             let anim = CABasicAnimation(keyPath: "transform.rotation.z")
-            anim.duration = 1
+            anim.duration = CFTimeInterval(animationDuration)
             anim.toValue = NSNumber(value: Float.pi * 2)
             anim.repeatCount = Float.infinity
             imageView.layer.add(anim, forKey: "rotate")
         case .error:
-            print("nothing")
+            break
         }
     }
 

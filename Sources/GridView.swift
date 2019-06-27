@@ -59,19 +59,19 @@ open class GridView: UIView, PatternLockGrid {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         if let outerRadius = outerRoundConfig.radius {
-            let outerRect = CGRect(x: (bounds.size.width - (outerRadius * 2))/2, y: (bounds.size.height - (outerRadius * 2))/2, width: outerRadius * 2, height: outerRadius * 2)
-            let outerPath = UIBezierPath(ovalIn: outerRect)
+            outerRound.frame = CGRect(x: (bounds.size.width - (outerRadius * 2))/2, y: (bounds.size.height - (outerRadius * 2))/2, width: outerRadius * 2, height: outerRadius * 2)
+            let outerPath = UIBezierPath(ovalIn: outerRound.bounds)
             outerRound.path = outerPath.cgPath
         }
         if let innerRadius = innerRoundConfig.radius {
-            let innerRect = CGRect(x: (bounds.size.width - (innerRadius * 2))/2, y: (bounds.size.height - (innerRadius * 2))/2, width: innerRadius * 2, height: innerRadius * 2)
-            let innerPath = UIBezierPath(ovalIn: innerRect)
+            innerRound.frame = CGRect(x: (bounds.size.width - (innerRadius * 2))/2, y: (bounds.size.height - (innerRadius * 2))/2, width: innerRadius * 2, height: innerRadius * 2)
+            let innerPath = UIBezierPath(ovalIn: innerRound.bounds)
             innerRound.path = innerPath.cgPath
         }
         CATransaction.commit()
     }
 
-    public func setStatus(_ status: GridStatus) {
+    open func setStatus(_ status: GridStatus) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         innerRound.lineWidth = innerRoundConfig.strokeLineWidthStatus?.map[status] ?? 0

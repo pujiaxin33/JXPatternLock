@@ -56,7 +56,7 @@ class ExampleViewController: UIViewController, PatternLockViewDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        lockView.frame = CGRect(x: 50, y: 200, width: view.bounds.size.width - 100, height: view.bounds.size.width - 100)
+        lockView.frame = CGRect(x: 20, y: 200, width: view.bounds.size.width - 40, height: view.bounds.size.width - 40)
     }
 
     func lockView(_ lockView: PatternLockView, didConnectedGrid grid: PatternLockGrid) {

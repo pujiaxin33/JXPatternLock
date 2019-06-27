@@ -13,6 +13,12 @@ open class ConnectLineView: UIView, ConnectLine {
     public var lineNormalColor: UIColor = UIColor.lightGray
     public var lineErrorColor: UIColor = UIColor.red
     public var lineWidth: CGFloat = 3
+    // lineColor和lineWidth通过上面属性配置，比如lineJoin、lineDashPattern等属性，通过该闭包自定义
+    public var lineOtherConfig: ((CAShapeLayer) -> ())? {
+        didSet {
+            lineOtherConfig?(line)
+        }
+    }
     public var isTriangleHidden: Bool = true {
         didSet {
             if !isTriangleHidden {
@@ -32,15 +38,21 @@ open class ConnectLineView: UIView, ConnectLine {
     public var triangleWidth: CGFloat = 15
 
     private var currentPoint: CGPoint?
-    private lazy var connectedGridViews: [PatternLockGrid] = { [PatternLockGrid]() }()
+    private lazy var connectedGrids: [PatternLockGrid] = { [PatternLockGrid]() }()
     private var triangles: [CAShapeLayer]?
     private let line: CAShapeLayer = CAShapeLayer()
+
+    deinit {
+        lineOtherConfig = nil
+    }
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
 
         backgroundColor = UIColor.clear
         line.fillColor = nil
+        line.lineJoin = .round
+        line.lineCap = .round
         layer.addSublayer(line)
     }
 
@@ -48,7 +60,7 @@ open class ConnectLineView: UIView, ConnectLine {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public func setStatus(_ status: ConnectLineStatus) {
+    open func setStatus(_ status: ConnectLineStatus) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         line.lineWidth = lineWidth
@@ -65,22 +77,22 @@ open class ConnectLineView: UIView, ConnectLine {
         CATransaction.commit()
     }
 
-    public func addGrid(_ grid: PatternLockGrid) {
-        connectedGridViews.append(grid)
+    open func addGrid(_ grid: PatternLockGrid) {
+        connectedGrids.append(grid)
         drawLine()
     }
 
-    public func addPoint(_ point: CGPoint) {
+    open func addPoint(_ point: CGPoint) {
         currentPoint = point
         drawLine()
     }
 
-    public func reset() {
+    open func reset() {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         currentPoint = nil
         line.path = nil
-        connectedGridViews.removeAll()
+        connectedGrids.removeAll()
         triangles?.forEach { $0.removeFromSuperlayer() }
         triangles?.removeAll()
         setStatus(.normal)
@@ -88,24 +100,24 @@ open class ConnectLineView: UIView, ConnectLine {
     }
 
     func drawLine() {
-        guard connectedGridViews.isEmpty == false else {
+        guard connectedGrids.isEmpty == false else {
             return
         }
         triangles?.forEach { $0.removeFromSuperlayer() }
         triangles?.removeAll()
         let path = UIBezierPath()
-        for (index, gridView) in connectedGridViews.enumerated() {
+        for (index, gridView) in connectedGrids.enumerated() {
             if index == 0 {
                 path.move(to: gridView.center)
             }else {
                 path.addLine(to: gridView.center)
             }
             if !isTriangleHidden {
-                if connectedGridViews.count - 1 == index && currentPoint != nil {
+                if connectedGrids.count - 1 == index && currentPoint != nil {
                     //最后一个
                     addTriangle(from: gridView.center, to: currentPoint!)
-                }else if connectedGridViews.count > index + 1  {
-                    let nextGridView = connectedGridViews[index + 1]
+                }else if connectedGrids.count > index + 1  {
+                    let nextGridView = connectedGrids[index + 1]
                     addTriangle(from: gridView.center, to: nextGridView.center)
                 }
             }
