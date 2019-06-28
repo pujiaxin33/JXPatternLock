@@ -11,24 +11,23 @@ import UIKit
 /// 圆的配置：
 /// 不想要的配置设置为nil即可。
 /// 比如不显示内圆时，把radius设置nil即可。
-/// 不显示圆的strokeLine时，把strokeLineWidthStatus设置为你能即可。
+/// 不显示圆的Line时，把lineWidthStatus设置为nil即可。
 /// fillColor更精细的配置示例：normal状态不显示，connect状态显示blue，error状态显示red。代码为：`GridPropertyStatus<UIColor>.init(normal: nil, connect: .blue, error: .red)`
 public struct RoundConfig {
     public var radius: CGFloat?
-    //TODO:strokeLineWidthStatus\strokeColorStatus命名优化
-    public var strokeLineWidthStatus: GridPropertyStatus<CGFloat>?
+    public var lineWidthStatus: GridPropertyStatus<CGFloat>?
+    public var lineColorStatus: GridPropertyStatus<UIColor>?
     public var fillColorStatus: GridPropertyStatus<UIColor>?
-    public var strokeColorStatus: GridPropertyStatus<UIColor>?
 
-    public init(radius: CGFloat?, strokeLineWidthStatus: GridPropertyStatus<CGFloat>?, fillColorStatus: GridPropertyStatus<UIColor>?, strokeColorStatus: GridPropertyStatus<UIColor>?) {
+    public init(radius: CGFloat?, lineWidthStatus: GridPropertyStatus<CGFloat>?, lineColorStatus: GridPropertyStatus<UIColor>?, fillColorStatus: GridPropertyStatus<UIColor>?) {
         self.radius = radius
-        self.strokeLineWidthStatus = strokeLineWidthStatus
+        self.lineWidthStatus = lineWidthStatus
+        self.lineColorStatus = lineColorStatus
         self.fillColorStatus = fillColorStatus
-        self.strokeColorStatus = strokeColorStatus
     }
 
     /// 类属性，所有状态都不显示的时候使用
-    static public var empty: RoundConfig { return RoundConfig.init(radius: nil, strokeLineWidthStatus: nil, fillColorStatus: nil, strokeColorStatus: nil) }
+    static public var empty: RoundConfig { return RoundConfig.init(radius: nil, lineWidthStatus: nil, lineColorStatus: nil, fillColorStatus: nil) }
 }
 
 open class GridView: UIView, PatternLockGrid {
@@ -75,12 +74,12 @@ open class GridView: UIView, PatternLockGrid {
     open func setStatus(_ status: GridStatus) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
-        innerRound.lineWidth = innerRoundConfig.strokeLineWidthStatus?.map[status] ?? 0
+        innerRound.lineWidth = innerRoundConfig.lineWidthStatus?.map[status] ?? 0
         innerRound.fillColor = innerRoundConfig.fillColorStatus?.map[status]?.cgColor
-        innerRound.strokeColor = innerRoundConfig.strokeColorStatus?.map[status]?.cgColor
-        outerRound.lineWidth = outerRoundConfig.strokeLineWidthStatus?.map[status] ?? 0
+        innerRound.strokeColor = innerRoundConfig.lineColorStatus?.map[status]?.cgColor
+        outerRound.lineWidth = outerRoundConfig.lineWidthStatus?.map[status] ?? 0
         outerRound.fillColor = outerRoundConfig.fillColorStatus?.map[status]?.cgColor
-        outerRound.strokeColor = outerRoundConfig.strokeColorStatus?.map[status]?.cgColor
+        outerRound.strokeColor = outerRoundConfig.lineColorStatus?.map[status]?.cgColor
         CATransaction.commit()
     }
 }

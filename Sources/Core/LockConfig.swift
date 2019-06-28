@@ -19,9 +19,9 @@ open class LockConfig: PatternLockViewConfig {
         //默认配置
         let gridView = GridView()
         let outerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: UIColor.blue.withAlphaComponent(0.3), error: UIColor.red.withAlphaComponent(0.3))
-        gridView.outerRoundConfig = RoundConfig(radius: 35, strokeLineWidthStatus: nil, fillColorStatus: outerFillColorStatus, strokeColorStatus: nil)
+        gridView.outerRoundConfig = RoundConfig(radius: 35, lineWidthStatus: nil, lineColorStatus: nil, fillColorStatus: outerFillColorStatus)
         let innerFillColorStatus = GridPropertyStatus<UIColor>(normal: UIColor.lightGray, connect: UIColor.blue, error: UIColor.red)
-        gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: nil, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
+        gridView.innerRoundConfig = RoundConfig(radius: 10, lineWidthStatus: nil, lineColorStatus: nil, fillColorStatus: innerFillColorStatus)
         return gridView
     }
 
