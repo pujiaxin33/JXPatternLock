@@ -15,6 +15,7 @@ import UIKit
 /// fillColor更精细的配置示例：normal状态不显示，connect状态显示blue，error状态显示red。代码为：`GridPropertyStatus<UIColor>.init(normal: nil, connect: .blue, error: .red)`
 public struct RoundConfig {
     public var radius: CGFloat?
+    //TODO:strokeLineWidthStatus\strokeColorStatus命名优化
     public var strokeLineWidthStatus: GridPropertyStatus<CGFloat>?
     public var fillColorStatus: GridPropertyStatus<UIColor>?
     public var strokeColorStatus: GridPropertyStatus<UIColor>?

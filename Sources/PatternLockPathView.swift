@@ -30,10 +30,4 @@ open class PatternLockPathView: PatternLockView {
             }
         }
     }
-
-    public func reset() {
-        connectedGridViews.forEach { $0.setStatus(.normal) }
-        connectedGridViews.removeAll()
-        config.connectLine?.reset()
-    }
 }

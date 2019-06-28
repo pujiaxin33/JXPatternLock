@@ -31,6 +31,12 @@ class ViewController: UITableViewController {
             }
         }
         switch title {
+        case "密码设置、修改、验证":
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "SetupGuideViewController")
+            vc.title = title
+            self.navigationController?.pushViewController(vc, animated: true)
+
         case "箭头":
             let config = LockConfig()
             config.gridSize = CGSize(width: 70, height: 70)
@@ -42,9 +48,8 @@ class ViewController: UITableViewController {
                 let outerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 1, connect: 2, error: 2)
                 let outerStrokeColorStatus = GridPropertyStatus<UIColor>(normal: tintColor, connect: tintColor, error: .red)
                 gridView.outerRoundConfig = RoundConfig(radius: 33, strokeLineWidthStatus: outerStrokeLineWidthStatus, fillColorStatus: nil, strokeColorStatus: outerStrokeColorStatus)
-                let innerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 0, connect: 0, error: 0)
                 let innerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: tintColor, error: .red)
-                gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: innerStrokeLineWidthStatus, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
+                gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: nil, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
                 return gridView
             }
             let lineView = ConnectLineView()
@@ -225,9 +230,8 @@ class ViewController: UITableViewController {
                 let outerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 1, connect: 2, error: 2)
                 let outerStrokeColorStatus = GridPropertyStatus<UIColor>(normal: tintColor, connect: tintColor, error: .red)
                 gridView.outerRoundConfig = RoundConfig(radius: 33, strokeLineWidthStatus: outerStrokeLineWidthStatus, fillColorStatus: nil, strokeColorStatus: outerStrokeColorStatus)
-                let innerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 0, connect: 0, error: 0)
                 let innerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: tintColor, error: .red)
-                gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: innerStrokeLineWidthStatus, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
+                gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: nil, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
                 return gridView
             }
             let lineView = ConnectLineView()
@@ -254,9 +258,8 @@ class ViewController: UITableViewController {
                 let outerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 1, connect: 2, error: 2)
                 let outerStrokeColorStatus = GridPropertyStatus<UIColor>(normal: tintColor, connect: tintColor, error: .red)
                 gridView.outerRoundConfig = RoundConfig(radius: 33, strokeLineWidthStatus: outerStrokeLineWidthStatus, fillColorStatus: nil, strokeColorStatus: outerStrokeColorStatus)
-                let innerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 0, connect: 0, error: 0)
                 let innerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: tintColor, error: .red)
-                gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: innerStrokeLineWidthStatus, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
+                gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: nil, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
                 return gridView
             }
             let lineView = ImageLineView(imageStatus: .init(normal: UIImage(named: "arrow"), error: UIImage(named: "arrowRed")))
@@ -278,9 +281,8 @@ class ViewController: UITableViewController {
                 let outerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 1, connect: 2, error: 2)
                 let outerStrokeColorStatus = GridPropertyStatus<UIColor>(normal: tintColor, connect: tintColor, error: .red)
                 gridView.outerRoundConfig = RoundConfig(radius: 33, strokeLineWidthStatus: outerStrokeLineWidthStatus, fillColorStatus: nil, strokeColorStatus: outerStrokeColorStatus)
-                let innerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 0, connect: 0, error: 0)
                 let innerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: tintColor, error: .red)
-                gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: innerStrokeLineWidthStatus, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
+                gridView.innerRoundConfig = RoundConfig(radius: 10, strokeLineWidthStatus: nil, fillColorStatus: innerFillColorStatus, strokeColorStatus: nil)
                 return gridView
             }
             let lineView = ImageLineView(imageStatus: .init(normal: UIImage(named: "fish"), error: UIImage(named: "fishRed")))

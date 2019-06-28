@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		19182EC422C378C800389985 /* jinitaimei.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19182EC322C378C800389985 /* jinitaimei.jpg */; };
+		19182ED222C5B86400389985 /* PasswordConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182ED122C5B86400389985 /* PasswordConfigViewController.swift */; };
+		19182ED422C5C04A00389985 /* SetupGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182ED322C5C04A00389985 /* SetupGuideViewController.swift */; };
+		19182ED622C5DBC700389985 /* PasswordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182ED522C5DBC700389985 /* PasswordManager.swift */; };
 		195C3DBD22BD108100521461 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195C3DBC22BD108100521461 /* AppDelegate.swift */; };
 		195C3DBF22BD108100521461 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195C3DBE22BD108100521461 /* ViewController.swift */; };
 		195C3DC222BD108100521461 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 195C3DC022BD108100521461 /* Main.storyboard */; };
@@ -34,6 +37,9 @@
 
 /* Begin PBXFileReference section */
 		19182EC322C378C800389985 /* jinitaimei.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = jinitaimei.jpg; path = ../../../../../../Downloads/jinitaimei.jpg; sourceTree = "<group>"; };
+		19182ED122C5B86400389985 /* PasswordConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordConfigViewController.swift; sourceTree = "<group>"; };
+		19182ED322C5C04A00389985 /* SetupGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupGuideViewController.swift; sourceTree = "<group>"; };
+		19182ED522C5DBC700389985 /* PasswordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordManager.swift; sourceTree = "<group>"; };
 		195C3DB922BD108100521461 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		195C3DBC22BD108100521461 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		195C3DBE22BD108100521461 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +94,9 @@
 				195C3DBC22BD108100521461 /* AppDelegate.swift */,
 				195C3DBE22BD108100521461 /* ViewController.swift */,
 				19E72A0522C1F9D9008ACDA0 /* ExampleViewController.swift */,
+				19182ED322C5C04A00389985 /* SetupGuideViewController.swift */,
+				19182ED122C5B86400389985 /* PasswordConfigViewController.swift */,
+				19182ED522C5DBC700389985 /* PasswordManager.swift */,
 				195C3DC022BD108100521461 /* Main.storyboard */,
 				195C3DC322BD108400521461 /* Assets.xcassets */,
 				195C3DC522BD108400521461 /* LaunchScreen.storyboard */,
@@ -178,7 +187,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19182ED622C5DBC700389985 /* PasswordManager.swift in Sources */,
+				19182ED422C5C04A00389985 /* SetupGuideViewController.swift in Sources */,
 				195C3DBF22BD108100521461 /* ViewController.swift in Sources */,
+				19182ED222C5B86400389985 /* PasswordConfigViewController.swift in Sources */,
 				195C3DBD22BD108100521461 /* AppDelegate.swift in Sources */,
 				19E72A0622C1F9D9008ACDA0 /* ExampleViewController.swift in Sources */,
 			);

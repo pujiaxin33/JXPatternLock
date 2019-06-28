@@ -125,12 +125,6 @@ open class PatternLockView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    open override func willMove(toSuperview newSuperview: UIView?) {
-        if newSuperview == nil {
-            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(didConnectCompleted), object: nil)
-        }
-    }
-
     open override func layoutSubviews() {
         super.layoutSubviews()
 
@@ -149,6 +143,13 @@ open class PatternLockView: UIView {
     }
 
     //MARK: - Event
+    @objc public func reset() {
+        isTaskDelaying = false
+        connectedGridViews.forEach { $0.setStatus(.normal) }
+        connectedGridViews.removeAll()
+        config.connectLine?.reset()
+    }
+
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         touchesDidChanged(touches)
     }
@@ -167,8 +168,8 @@ open class PatternLockView: UIView {
 
     private func touchesDidChanged(_ touches: Set<UITouch>) {
         if isTaskDelaying {
-            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(didConnectCompleted), object: nil)
-            didConnectCompleted()
+            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(reset), object: nil)
+            reset()
         }
 
         guard let point = touches.randomElement()?.location(in: self) else {
@@ -205,17 +206,11 @@ open class PatternLockView: UIView {
             connectedGridViews.forEach { $0.setStatus(.error) }
             config.connectLine?.setStatus(.error)
             isTaskDelaying = true
-            perform(#selector(didConnectCompleted), with: nil, afterDelay: config.errorDisplayDuration, inModes: [RunLoop.Mode.common])
+            delegate?.lockViewDidConnectCompleted(self)
+            perform(#selector(reset), with: nil, afterDelay: config.errorDisplayDuration, inModes: [RunLoop.Mode.common])
         }else {
-            didConnectCompleted()
+            reset()
+            delegate?.lockViewDidConnectCompleted(self)
         }
-    }
-
-    @objc private func didConnectCompleted() {
-        isTaskDelaying = false
-        connectedGridViews.forEach { $0.setStatus(.normal) }
-        connectedGridViews.removeAll()
-        config.connectLine?.reset()
-        delegate?.lockViewDidConnectCompleted(self)
     }
 }
