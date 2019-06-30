@@ -97,7 +97,7 @@ open class ConnectLineView: UIView, ConnectLine {
     }
 
     func drawLine() {
-        guard connectedGrids.isEmpty == false else {
+        guard !connectedGrids.isEmpty else {
             return
         }
         triangles?.forEach { $0.removeFromSuperlayer() }

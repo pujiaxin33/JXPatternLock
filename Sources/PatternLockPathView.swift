@@ -21,10 +21,10 @@ open class PatternLockPathView: PatternLockView {
     }
 
     public func addGrid(at matrix: Matrix) {
-        for grid in gridViews {
+        for grid in grids {
             if grid.matrix == matrix {
                 grid.setStatus(.connect)
-                connectedGridViews.append(grid)
+                connectedGrids.append(grid)
                 config.connectLine?.addGrid(grid)
                 break
             }

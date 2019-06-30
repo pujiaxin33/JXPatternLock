@@ -12,12 +12,10 @@ public struct Matrix: Equatable {
     let row: Int
     let column: Int
     public static var zero: Matrix { return Matrix(row: 0, column: 0) }
-
     public init(row: Int, column: Int) {
         self.row = row
         self.column = column
     }
-
     public static func == (lhs: Matrix, rhs: Matrix) -> Bool {
         if lhs.row == rhs.row && lhs.column == rhs.column {
             return true
@@ -28,7 +26,7 @@ public struct Matrix: Equatable {
 
 /// Grid不同的状态显示不同的参数
 public struct GridPropertyStatus<T> {
-    public var map: [GridStatus: T] = [GridStatus: T]()
+    public private(set) var map: [GridStatus: T] = [GridStatus: T]()
     public init(normal: T?, connect: T?, error: T?) {
         map[.normal] = normal
         map[.connect] = connect
@@ -38,7 +36,7 @@ public struct GridPropertyStatus<T> {
 
 /// ConnectLine不同的状态显示不同的参数
 public struct ConnectLinePropertyStatus<T> {
-    public var map: [ConnectLineStatus: T] = [ConnectLineStatus: T]()
+    public private(set) var map: [ConnectLineStatus: T] = [ConnectLineStatus: T]()
     public init(normal: T?, error: T?) {
         map[.normal] = normal
         map[.error] = error
@@ -92,8 +90,8 @@ public protocol PatternLockViewDelegate: AnyObject {
 open class PatternLockView: UIView {
     public weak var delegate: PatternLockViewDelegate?
     internal let config: PatternLockViewConfig
-    internal lazy var gridViews: [PatternLockGrid] = { [PatternLockGrid]() }()
-    internal lazy var connectedGridViews: [PatternLockGrid] = { [PatternLockGrid]() }()
+    internal lazy var grids: [PatternLockGrid] = { [PatternLockGrid]() }()
+    internal lazy var connectedGrids: [PatternLockGrid] = { [PatternLockGrid]() }()
     private var isTaskDelaying = false
 
     public init(config: PatternLockViewConfig) {
@@ -102,12 +100,12 @@ open class PatternLockView: UIView {
 
         for rowIndex in 0..<config.matrix.row {
             for columnIndex in 0..<config.matrix.column {
-                let gridView =  config.initGridClosure(Matrix(row: rowIndex, column: columnIndex))
-                gridView.setStatus(.normal)
-                gridView.matrix = Matrix(row: rowIndex, column: columnIndex)
-                gridView.identifier = "\(gridView.matrix.row * config.matrix.column + gridView.matrix.column)"
-                addSubview(gridView)
-                gridViews.append(gridView)
+                let grid =  config.initGridClosure(Matrix(row: rowIndex, column: columnIndex))
+                grid.setStatus(.normal)
+                grid.matrix = Matrix(row: rowIndex, column: columnIndex)
+                grid.identifier = "\(grid.matrix.row * config.matrix.column + grid.matrix.column)"
+                addSubview(grid)
+                grids.append(grid)
             }
         }
 
@@ -136,8 +134,8 @@ open class PatternLockView: UIView {
         if config.matrix.row > 1 {
             verticalSpacing = (bounds.size.width - CGFloat(config.matrix.row) * config.gridSize.height)/CGFloat(config.matrix.row - 1)
         }
-        gridViews.forEach { (gridView) in
-            gridView.frame = CGRect(x: CGFloat(gridView.matrix.column) * (horizantalSpacing + config.gridSize.width), y: CGFloat(gridView.matrix.row) * (verticalSpacing + config.gridSize.height), width: config.gridSize.width, height: config.gridSize.height)
+        grids.forEach { (grid) in
+            grid.frame = CGRect(x: CGFloat(grid.matrix.column) * (horizantalSpacing + config.gridSize.width), y: CGFloat(grid.matrix.row) * (verticalSpacing + config.gridSize.height), width: config.gridSize.width, height: config.gridSize.height)
         }
         config.connectLine?.frame = bounds
     }
@@ -145,8 +143,8 @@ open class PatternLockView: UIView {
     //MARK: - Event
     @objc public func reset() {
         isTaskDelaying = false
-        connectedGridViews.forEach { $0.setStatus(.normal) }
-        connectedGridViews.removeAll()
+        connectedGrids.forEach { $0.setStatus(.normal) }
+        connectedGrids.removeAll()
         config.connectLine?.reset()
     }
 
@@ -176,34 +174,34 @@ open class PatternLockView: UIView {
             return
         }
         config.connectLine?.setCurrentPoint(point)
-        var currentGridView: PatternLockGrid?
-        for gridView in gridViews {
-            if gridView.frame.contains(point) {
-                currentGridView = gridView
+        var currentGrid: PatternLockGrid?
+        for grid in grids {
+            if grid.frame.contains(point) {
+                currentGrid = grid
                 break
             }
         }
-        guard currentGridView != nil  else {
+        guard currentGrid != nil else {
             return
         }
-        let isContain = connectedGridViews.contains { (gridView) -> Bool in
-            if gridView.matrix == currentGridView?.matrix {
+        let isContain = connectedGrids.contains { (grid) -> Bool in
+            if grid.matrix == currentGrid?.matrix {
                 return true
             }else {
                 return false
             }
         }
         if !isContain {
-            connectedGridViews.append(currentGridView!)
-            config.connectLine?.addGrid(currentGridView!)
-            currentGridView?.setStatus(.connect)
-            delegate?.lockView(self, didConnectedGrid: currentGridView!)
+            connectedGrids.append(currentGrid!)
+            config.connectLine?.addGrid(currentGrid!)
+            currentGrid?.setStatus(.connect)
+            delegate?.lockView(self, didConnectedGrid: currentGrid!)
         }
     }
 
     private func touchesDidEnded() {
         if delegate?.lockViewShouldShowErrorBeforeConnectCompleted(self) == true {
-            connectedGridViews.forEach { $0.setStatus(.error) }
+            connectedGrids.forEach { $0.setStatus(.error) }
             config.connectLine?.setStatus(.error)
             isTaskDelaying = true
             delegate?.lockViewDidConnectCompleted(self)
