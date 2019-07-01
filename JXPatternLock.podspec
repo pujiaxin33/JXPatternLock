@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "JXPatternLock"
-  s.version = "0.0.3"
+  s.version = "0.0.5"
   s.summary      = "一个轻量级、配置丰富、灵活扩展的图案解锁库（手势解锁库） Pattern Lock & Gesture Password"
   s.homepage     = "https://github.com/pujiaxin33/JXPatternLock"
   s.license      = "MIT"
