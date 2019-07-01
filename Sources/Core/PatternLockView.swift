@@ -75,8 +75,10 @@ public protocol ConnectLine: UIView {
 public protocol PatternLockViewConfig {
     var matrix: Matrix { get }
     var gridSize: CGSize { get }
-    var connectLine: ConnectLine? { get }
     var connectLineHierarchy: ConnectLineHierarchy { get }
+    /// 是否允许两次连接点之间相交的点被自动连接，举例：水平依次连接(0,1)、(0,2)坐标的点，中间坐标为(0,1)的点，为true就被自动连接。
+    var autoMediumGridsConnect: Bool { get }
+    var connectLine: ConnectLine? { get }
     var errorDisplayDuration: TimeInterval { get }
     var initGridClosure: (Matrix) -> (PatternLockGrid) { get }
 }
@@ -192,6 +194,18 @@ open class PatternLockView: UIView {
             }
         }
         if !isContain {
+            //判断当前点和上一个点之间有没有点（仅是在一条直线上的点）
+            if config.autoMediumGridsConnect && connectedGrids.last != nil {
+                let tempGrids = mediumGrids(from: connectedGrids.last!.matrix, endMatrix: currentGrid!.matrix)
+                if tempGrids != nil {
+                    connectedGrids.append(contentsOf: tempGrids!)
+                    for tempGrid in tempGrids! {
+                        config.connectLine?.addGrid(tempGrid)
+                        tempGrid.setStatus(.connect)
+                        delegate?.lockView(self, didConnectedGrid: tempGrid)
+                    }
+                }
+            }
             connectedGrids.append(currentGrid!)
             config.connectLine?.addGrid(currentGrid!)
             currentGrid?.setStatus(.connect)
@@ -209,6 +223,75 @@ open class PatternLockView: UIView {
         }else {
             reset()
             delegate?.lockViewDidConnectCompleted(self)
+        }
+    }
+
+    private func mediumGrids(from startMatrix: Matrix, endMatrix: Matrix) -> [PatternLockGrid]? {
+        guard abs(endMatrix.row - startMatrix.row) > 1 || abs(endMatrix.column - startMatrix.column) > 1 else {
+            return nil
+        }
+        let mediumRowIndex = abs(endMatrix.row - startMatrix.row)
+        let mediumColumnIndex = abs(endMatrix.column - startMatrix.column)
+        if mediumColumnIndex != 0 && mediumRowIndex != 0 && mediumRowIndex != mediumColumnIndex {
+            return nil
+        }
+        let mediumCount = max(mediumRowIndex - 1, mediumColumnIndex - 1)
+        var resultMatrixs = [Matrix]()
+        if endMatrix.column > startMatrix.column {
+            if endMatrix.row > startMatrix.row {
+                //endMatrix在右下方
+                for index in 1...mediumCount {
+                    resultMatrixs.append(Matrix(row: startMatrix.row + index, column: startMatrix.column + index))
+                }
+            }else if endMatrix.row == startMatrix.row {
+                //endMatrix在水平方向右方
+                for index in 1...mediumCount {
+                    resultMatrixs.append(Matrix(row: startMatrix.row, column: startMatrix.column + index))
+                }
+            }else {
+                //endMatrix在右上方
+                for index in 1...mediumCount {
+                    resultMatrixs.append(Matrix(row: startMatrix.row - index, column: startMatrix.column + index))
+                }
+            }
+        }else if endMatrix.column == startMatrix.column {
+            if endMatrix.row > startMatrix.row {
+                //endMatrix在垂直方向上方
+                for index in 1...mediumCount {
+                    resultMatrixs.append(Matrix(row: startMatrix.row + index, column: startMatrix.column))
+                }
+            }else {
+                //endMatrix在垂直方向下方
+                for index in 1...mediumCount {
+                    resultMatrixs.append(Matrix(row: startMatrix.row - index, column: startMatrix.column))
+                }
+            }
+        }else {
+            if endMatrix.row > startMatrix.row {
+                //endMatrix在左下方
+                for index in 1...mediumCount {
+                    resultMatrixs.append(Matrix(row: startMatrix.row + index, column: startMatrix.column - index))
+                }
+            }else if endMatrix.row == startMatrix.row {
+                //endMatrix在水平方向左方
+                for index in 1...mediumCount {
+                    resultMatrixs.append(Matrix(row: startMatrix.row, column: startMatrix.column - index))
+                }
+            }else {
+                //endMatrix在左上方
+                for index in 1...mediumCount {
+                    resultMatrixs.append(Matrix(row: startMatrix.row - index, column: startMatrix.column - index))
+                }
+            }
+        }
+        let connectedMatixs = connectedGrids.map { $0.matrix }
+        return grids.filter { (grid) -> Bool in
+            if resultMatrixs.contains(grid.matrix) {
+                if !connectedMatixs.contains(grid.matrix) {
+                    return true
+                }
+            }
+            return false
         }
     }
 }

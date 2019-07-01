@@ -248,6 +248,7 @@ class PasswordConfigViewController: ExampleViewController {
                 }
             }
         }
+        print(currentPassword)
         currentPassword = ""
     }
 
