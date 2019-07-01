@@ -3,9 +3,16 @@
 [![platform](https://img.shields.io/badge/platform-iOS-blue.svg?style=plastic)](#)
 [![languages](https://img.shields.io/badge/language-swift-blue.svg)](#) 
 [![cocoapods](https://img.shields.io/badge/cocoapods-supported-4BC51D.svg?style=plastic)](https://cocoapods.org/pods/JXPatternLock)
-[![support](https://img.shields.io/badge/support-ios%208%2B-orange.svg)](#) 
+[![support](https://img.shields.io/badge/support--ios-iOS9%2B-orange.svg)](#) 
 
-patternlock desc
+An easy-to-use, powerful, customizable pattern lock view in swift. 图形解锁／手势解锁 / 手势密码 / 图案密码 / 九宫格密码
+
+相比于其他同类三方库有哪些优势：
+- 完全面对协议编程，支持高度自定义**网格视图**和**连接线视图**，轻松实现各类不同需求；
+- 默认支持多种配置效果，支持大部分主流效果，引入就可以搞定需求；
+- 不同类的职责明确，可以通过继承自定义效果；
+- 源码采用**Swift5**编写，通过泛型、枚举、函数式编程优化代码，具有更高的学习价值；
+- 后期会持续迭代，不断添加主流效果；
 
 ## 效果预览
 
@@ -31,7 +38,7 @@ fill白色  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/mast
 ## 要求
 
 - iOS 9.0+
-- Xcode 12.1+
+- Xcode 10.2.1+
 - Swift 5.0
 
 ## 安装
@@ -98,8 +105,11 @@ view.addSubview(lockView)
 
 ## 结构
 
+![structure](https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/JXPatternLockStructure.png)
 
-
+完全遵从面对协议开发。
+`PatternLockView`依赖于配置协议`PatternLockViewConfig`。
+配置协议配置网格协议`PatternLockGrid`和连接线协议`ConnectLine`。
 
 ## 补充
 
