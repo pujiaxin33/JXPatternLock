@@ -59,7 +59,7 @@ end
 ### Carthage
 在cartfile文件添加：
 ```
-github "pujiaxin33/JXSegmentedView"
+github "pujiaxin33/JXPatternLock"
 ```
 然后执行`carthage update --platform iOS` 即可
 
