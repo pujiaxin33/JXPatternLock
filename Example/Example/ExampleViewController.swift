@@ -11,9 +11,9 @@ import JXPatternLock
 
 class ExampleViewController: UIViewController, PatternLockViewDelegate {
     var lockView: PatternLockView!
-    let config: LockConfig
+    let config: PatternLockViewConfig
 
-    init(config: LockConfig) {
+    init(config: PatternLockViewConfig) {
         self.config = config
         super.init(nibName: nil, bundle: nil)
     }

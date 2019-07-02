@@ -19,6 +19,16 @@
 		195C3DD422BD114900521461 /* JXPatternLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 195C3DCF22BD112400521461 /* JXPatternLock.framework */; };
 		195C3DD522BD114900521461 /* JXPatternLock.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 195C3DCF22BD112400521461 /* JXPatternLock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		19E72A0622C1F9D9008ACDA0 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E72A0522C1F9D9008ACDA0 /* ExampleViewController.swift */; };
+		19FB283B22CB031D0006826D /* ArrowConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB283A22CB031D0006826D /* ArrowConfig.swift */; };
+		19FB283D22CB06350006826D /* GrayRoundConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB283C22CB06350006826D /* GrayRoundConfig.swift */; };
+		19FB283F22CB06E50006826D /* WhiteRoundConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB283E22CB06E50006826D /* WhiteRoundConfig.swift */; };
+		19FB284122CB072C0006826D /* NightBlueConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB284022CB072C0006826D /* NightBlueConfig.swift */; };
+		19FB284322CB07850006826D /* WhiteFillConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB284222CB07850006826D /* WhiteFillConfig.swift */; };
+		19FB284522CB07D90006826D /* ShadowConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB284422CB07D90006826D /* ShadowConfig.swift */; };
+		19FB284722CB088F0006826D /* ImageConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB284622CB088F0006826D /* ImageConfig.swift */; };
+		19FB284922CB09110006826D /* RotateImageConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB284822CB09110006826D /* RotateImageConfig.swift */; };
+		19FB284B22CB1DC20006826D /* ImageLineConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB284A22CB1DC20006826D /* ImageLineConfig.swift */; };
+		19FB284D22CB1DFB0006826D /* FishLineConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB284C22CB1DFB0006826D /* FishLineConfig.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +59,16 @@
 		195C3DC822BD108400521461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		195C3DCF22BD112400521461 /* JXPatternLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JXPatternLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19E72A0522C1F9D9008ACDA0 /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
+		19FB283A22CB031D0006826D /* ArrowConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowConfig.swift; sourceTree = "<group>"; };
+		19FB283C22CB06350006826D /* GrayRoundConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayRoundConfig.swift; sourceTree = "<group>"; };
+		19FB283E22CB06E50006826D /* WhiteRoundConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteRoundConfig.swift; sourceTree = "<group>"; };
+		19FB284022CB072C0006826D /* NightBlueConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightBlueConfig.swift; sourceTree = "<group>"; };
+		19FB284222CB07850006826D /* WhiteFillConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteFillConfig.swift; sourceTree = "<group>"; };
+		19FB284422CB07D90006826D /* ShadowConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowConfig.swift; sourceTree = "<group>"; };
+		19FB284622CB088F0006826D /* ImageConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConfig.swift; sourceTree = "<group>"; };
+		19FB284822CB09110006826D /* RotateImageConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateImageConfig.swift; sourceTree = "<group>"; };
+		19FB284A22CB1DC20006826D /* ImageLineConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLineConfig.swift; sourceTree = "<group>"; };
+		19FB284C22CB1DFB0006826D /* FishLineConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishLineConfig.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +111,7 @@
 		195C3DBB22BD108100521461 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				19FB283922CB030A0006826D /* Configs */,
 				195C3DBC22BD108100521461 /* AppDelegate.swift */,
 				195C3DBE22BD108100521461 /* ViewController.swift */,
 				19E72A0522C1F9D9008ACDA0 /* ExampleViewController.swift */,
@@ -112,6 +133,23 @@
 				195C3DCF22BD112400521461 /* JXPatternLock.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		19FB283922CB030A0006826D /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				19FB283A22CB031D0006826D /* ArrowConfig.swift */,
+				19FB283C22CB06350006826D /* GrayRoundConfig.swift */,
+				19FB283E22CB06E50006826D /* WhiteRoundConfig.swift */,
+				19FB284022CB072C0006826D /* NightBlueConfig.swift */,
+				19FB284222CB07850006826D /* WhiteFillConfig.swift */,
+				19FB284422CB07D90006826D /* ShadowConfig.swift */,
+				19FB284622CB088F0006826D /* ImageConfig.swift */,
+				19FB284822CB09110006826D /* RotateImageConfig.swift */,
+				19FB284A22CB1DC20006826D /* ImageLineConfig.swift */,
+				19FB284C22CB1DFB0006826D /* FishLineConfig.swift */,
+			);
+			path = Configs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,12 +225,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19FB283F22CB06E50006826D /* WhiteRoundConfig.swift in Sources */,
+				19FB283B22CB031D0006826D /* ArrowConfig.swift in Sources */,
+				19FB284322CB07850006826D /* WhiteFillConfig.swift in Sources */,
+				19FB284B22CB1DC20006826D /* ImageLineConfig.swift in Sources */,
+				19FB283D22CB06350006826D /* GrayRoundConfig.swift in Sources */,
 				19182ED622C5DBC700389985 /* PasswordManager.swift in Sources */,
 				19182ED422C5C04A00389985 /* SetupGuideViewController.swift in Sources */,
+				19FB284D22CB1DFB0006826D /* FishLineConfig.swift in Sources */,
 				195C3DBF22BD108100521461 /* ViewController.swift in Sources */,
+				19FB284122CB072C0006826D /* NightBlueConfig.swift in Sources */,
+				19FB284522CB07D90006826D /* ShadowConfig.swift in Sources */,
 				19182ED222C5B86400389985 /* PasswordConfigViewController.swift in Sources */,
+				19FB284922CB09110006826D /* RotateImageConfig.swift in Sources */,
 				195C3DBD22BD108100521461 /* AppDelegate.swift in Sources */,
 				19E72A0622C1F9D9008ACDA0 /* ExampleViewController.swift in Sources */,
+				19FB284722CB088F0006826D /* ImageConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
