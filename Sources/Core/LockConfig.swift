@@ -9,7 +9,7 @@
 import Foundation
 
 /// 所有的配置项都是静态配置，配置好之后再更新是没有效果的！！！
-open class LockConfig: PatternLockViewConfig {
+public struct LockConfig: PatternLockViewConfig {
     public var matrix: Matrix = Matrix(row: 3, column: 3)
     public var gridSize: CGSize = CGSize(width: 70, height: 70)
     public var connectLine: ConnectLine?

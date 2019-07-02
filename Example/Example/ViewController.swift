@@ -88,7 +88,7 @@ class ViewController: UITableViewController {
             self.navigationController?.pushViewController(vc, animated: true)
 
         case "虚线(使用LockConfig)":
-            let config = LockConfig()
+            var config = LockConfig()
             config.gridSize = CGSize(width: 70, height: 70)
             config.matrix = Matrix(row: 3, column: 3)
             config.errorDisplayDuration = 1

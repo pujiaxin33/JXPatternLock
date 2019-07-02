@@ -36,7 +36,7 @@ class PasswordConfigViewController: ExampleViewController {
     private let maxErrorCount: Int = 5
     private var currentErrorCount: Int = 0
 
-    init(config: LockConfig, type: PasswordConfigType) {
+    init(config: PatternLockViewConfig, type: PasswordConfigType) {
         self.type = type
         super.init(config: config)
     }
@@ -55,7 +55,7 @@ class PasswordConfigViewController: ExampleViewController {
         tipsLabel.bottomAnchor.constraint(equalTo: lockView.topAnchor, constant: -20).isActive = true
         tipsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
-        let pathConifg = LockConfig()
+        var pathConifg = LockConfig()
         pathConifg.gridSize = CGSize(width: 10, height: 10)
         pathConifg.matrix = Matrix(row: 3, column: 3)
         let tintColor = colorWithRGBA(r: 18, g: 143, b: 235, a: 1)
