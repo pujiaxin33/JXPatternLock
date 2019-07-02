@@ -19,9 +19,6 @@ An easy-to-use, powerful, customizable pattern lock view in swift. 图形解锁�
 
 说明 | Gif |
 ----|------|
-设置密码  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/passwordSetup.gif" width="336" height="400"> |
-修改密码  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/passwordModify.gif" width="336" height="400"> |
-验证密码  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/passwordVertify.gif" width="336" height="400"> |
 箭头  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/arrow.gif" width="336" height="330"> |
 中间点自动连接 |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/autoConnect.gif" width="336" height="330"> |
 小灰点  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/grayRound.gif" width="336" height="330"> |
@@ -34,6 +31,9 @@ fill白色  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/mast
 破折线  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/dashLine.gif" width="336" height="330"> |
 图片连接线（箭头）  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/arrowLine.gif" width="336" height="330"> |
 图片连接线（小鱼儿）  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/fishLine.gif" width="336" height="330"> |
+设置密码  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/passwordSetup.gif" width="336" height="400"> |
+修改密码  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/passwordModify.gif" width="336" height="400"> |
+验证密码  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/passwordVertify.gif" width="336" height="400"> |
 
 ## 要求
 
