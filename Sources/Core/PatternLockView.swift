@@ -73,14 +73,14 @@ public protocol ConnectLine: UIView {
 }
 
 public protocol PatternLockViewConfig {
-    var matrix: Matrix { get }
-    var gridSize: CGSize { get }
-    var connectLineHierarchy: ConnectLineHierarchy { get }
+    var matrix: Matrix { set get }
+    var gridSize: CGSize { set get }
+    var connectLineHierarchy: ConnectLineHierarchy { set get }
     /// 是否允许两次连接点之间相交的点被自动连接，举例：水平依次连接(0,1)、(0,2)坐标的点，中间坐标为(0,1)的点，为true就被自动连接。
-    var autoMediumGridsConnect: Bool { get }
-    var connectLine: ConnectLine? { get }
-    var errorDisplayDuration: TimeInterval { get }
-    var initGridClosure: (Matrix) -> (PatternLockGrid) { get }
+    var autoMediumGridsConnect: Bool { set get }
+    var connectLine: ConnectLine? { set get }
+    var errorDisplayDuration: TimeInterval { set get }
+    var initGridClosure: (Matrix) -> (PatternLockGrid) { set get }
 }
 
 public protocol PatternLockViewDelegate: AnyObject {
