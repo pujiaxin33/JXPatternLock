@@ -64,12 +64,27 @@ github "pujiaxin33/JXPatternLock"
 
 ## 使用
 
-### 初始化`LockConfig`
+### 初始化`PatternLockViewConfig`
+
+#### 方式一：使用`LockConfig`
+`LockConfig`是默认提供的类，实现了`PatternLockViewConfig`协议。可以直接通过`LockConfig`的属性进行自定义。
 ```Swift
 let config = LockConfig()
 config.gridSize = CGSize(width: 70, height: 70)
 config.matrix = Matrix(row: 3, column: 3)
 config.errorDisplayDuration = 1
+```
+
+#### 方式二：新建实现`PatternLockViewConfig`协议的类
+该方式可以将所有配置细节聚集到自定义类的内部，外部只需要初始化自定义类即可。详情请参考demo里面的`ArrowConfig`类。这样有个好处就是，多个地方都需要用到同样配置的时候，只需要初始化相同的类，而不用像使用`LockConfig`那样，复制需要属性配置代码。
+```Swift
+struct ArrowConfig: PatternLockViewConfig {
+    var matrix: Matrix = Matrix(row: 3, column: 3)
+    var gridSize: CGSize = CGSize(width: 70, height: 70)
+    var connectLine: ConnectLine?
+    var autoMediumGridsConnect: Bool = false
+    //其他属性配置！只是示例，就不显示所有配置项，影响文档长度
+}
 ```
 
 ### 配置`GridView`
