@@ -26,7 +26,7 @@ An easy-to-use, powerful, customizable pattern lock view in swift. 图形解锁�
 fill白色  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/whiteFill.gif" width="336" height="330"> |
 阴影  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/shadow.gif" width="336" height="330"> |
 图片  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/image.gif" width="336" height="330"> |
-旋转  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/rotateImage.gif" width="336" height="330"> |
+旋转(鸡你太美)  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/rotateImage.gif" width="336" height="330"> |
 破折线  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/dashLine.gif" width="336" height="330"> |
 图片连接线（箭头）  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/arrowLine.gif" width="336" height="330"> |
 图片连接线（小鱼儿）  |  <img src="https://github.com/pujiaxin33/JXExampleImages/blob/master/PatternLock/fishLine.gif" width="336" height="330"> |
