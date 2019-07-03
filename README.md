@@ -76,7 +76,7 @@ config.errorDisplayDuration = 1
 ```
 
 #### 方式二：新建实现`PatternLockViewConfig`协议的类
-该方式可以将所有配置细节聚集到自定义类的内部，外部只需要初始化自定义类即可。详情请参考demo里面的`ArrowConfig`类。这样有个好处就是，多个地方都需要用到同样配置的时候，只需要初始化相同的类，而不用像使用`LockConfig`那样，复制需要属性配置代码。
+该方式可以将所有配置细节聚集到自定义类的内部，外部只需要初始化自定义类即可。详情请参考demo里面的`ArrowConfig`类。这样有个好处就是，多个地方都需要用到同样配置的时候，只需要初始化相同的类，而不用像使用`LockConfig`那样，复制属性配置代码。
 ```Swift
 struct ArrowConfig: PatternLockViewConfig {
     var matrix: Matrix = Matrix(row: 3, column: 3)
