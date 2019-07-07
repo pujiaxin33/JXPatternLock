@@ -3,6 +3,7 @@
 [![platform](https://img.shields.io/badge/platform-iOS-blue.svg?style=plastic)](#)
 [![languages](https://img.shields.io/badge/language-swift-blue.svg)](#) 
 [![cocoapods](https://img.shields.io/badge/cocoapods-supported-4BC51D.svg?style=plastic)](https://cocoapods.org/pods/JXPatternLock)
+[![carthage](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage/)
 [![support](https://img.shields.io/badge/support--ios-iOS9%2B-orange.svg)](#) 
 
 An easy-to-use, powerful, customizable pattern lock view in swift. 图形解锁／手势解锁 / 手势密码 / 图案密码 / 九宫格密码
