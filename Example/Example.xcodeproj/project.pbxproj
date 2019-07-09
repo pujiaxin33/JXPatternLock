@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		19182EC422C378C800389985 /* jinitaimei.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19182EC322C378C800389985 /* jinitaimei.jpg */; };
 		19182ED222C5B86400389985 /* PasswordConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182ED122C5B86400389985 /* PasswordConfigViewController.swift */; };
 		19182ED422C5C04A00389985 /* SetupGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182ED322C5C04A00389985 /* SetupGuideViewController.swift */; };
 		19182ED622C5DBC700389985 /* PasswordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182ED522C5DBC700389985 /* PasswordManager.swift */; };
@@ -16,8 +15,8 @@
 		195C3DC222BD108100521461 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 195C3DC022BD108100521461 /* Main.storyboard */; };
 		195C3DC422BD108400521461 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 195C3DC322BD108400521461 /* Assets.xcassets */; };
 		195C3DC722BD108400521461 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 195C3DC522BD108400521461 /* LaunchScreen.storyboard */; };
-		195C3DD422BD114900521461 /* JXPatternLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 195C3DCF22BD112400521461 /* JXPatternLock.framework */; };
-		195C3DD522BD114900521461 /* JXPatternLock.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 195C3DCF22BD112400521461 /* JXPatternLock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		19879E9422D4A20500767E2E /* JXPatternLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19879E9322D4A20500767E2E /* JXPatternLock.framework */; };
+		19879E9622D4A3CA00767E2E /* jinitaimei.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19879E9522D4A3CA00767E2E /* jinitaimei.jpg */; };
 		19E72A0622C1F9D9008ACDA0 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E72A0522C1F9D9008ACDA0 /* ExampleViewController.swift */; };
 		19FB283B22CB031D0006826D /* ArrowConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB283A22CB031D0006826D /* ArrowConfig.swift */; };
 		19FB283D22CB06350006826D /* GrayRoundConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB283C22CB06350006826D /* GrayRoundConfig.swift */; };
@@ -31,22 +30,7 @@
 		19FB284D22CB1DFB0006826D /* FishLineConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB284C22CB1DFB0006826D /* FishLineConfig.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		195C3DD622BD114900521461 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				195C3DD522BD114900521461 /* JXPatternLock.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		19182EC322C378C800389985 /* jinitaimei.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = jinitaimei.jpg; path = ../../../../../../Downloads/jinitaimei.jpg; sourceTree = "<group>"; };
 		19182ED122C5B86400389985 /* PasswordConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordConfigViewController.swift; sourceTree = "<group>"; };
 		19182ED322C5C04A00389985 /* SetupGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupGuideViewController.swift; sourceTree = "<group>"; };
 		19182ED522C5DBC700389985 /* PasswordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordManager.swift; sourceTree = "<group>"; };
@@ -58,6 +42,8 @@
 		195C3DC622BD108400521461 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		195C3DC822BD108400521461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		195C3DCF22BD112400521461 /* JXPatternLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JXPatternLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		19879E9322D4A20500767E2E /* JXPatternLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JXPatternLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		19879E9522D4A3CA00767E2E /* jinitaimei.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = jinitaimei.jpg; sourceTree = "<group>"; };
 		19E72A0522C1F9D9008ACDA0 /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		19FB283A22CB031D0006826D /* ArrowConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowConfig.swift; sourceTree = "<group>"; };
 		19FB283C22CB06350006826D /* GrayRoundConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayRoundConfig.swift; sourceTree = "<group>"; };
@@ -76,7 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				195C3DD422BD114900521461 /* JXPatternLock.framework in Frameworks */,
+				19879E9422D4A20500767E2E /* JXPatternLock.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,7 +72,7 @@
 		19182EC022C3780E00389985 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				19182EC322C378C800389985 /* jinitaimei.jpg */,
+				19879E9522D4A3CA00767E2E /* jinitaimei.jpg */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -130,6 +116,7 @@
 		195C3DCE22BD112400521461 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				19879E9322D4A20500767E2E /* JXPatternLock.framework */,
 				195C3DCF22BD112400521461 /* JXPatternLock.framework */,
 			);
 			name = Frameworks;
@@ -162,7 +149,6 @@
 				195C3DB522BD108100521461 /* Sources */,
 				195C3DB622BD108100521461 /* Frameworks */,
 				195C3DB722BD108100521461 /* Resources */,
-				195C3DD622BD114900521461 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -211,7 +197,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19182EC422C378C800389985 /* jinitaimei.jpg in Resources */,
+				19879E9622D4A3CA00767E2E /* jinitaimei.jpg in Resources */,
 				195C3DC722BD108400521461 /* LaunchScreen.storyboard in Resources */,
 				195C3DC422BD108400521461 /* Assets.xcassets in Resources */,
 				195C3DC222BD108100521461 /* Main.storyboard in Resources */,
