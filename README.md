@@ -3,6 +3,7 @@
 [![platform](https://img.shields.io/badge/platform-iOS-blue.svg?style=plastic)](#)
 [![languages](https://img.shields.io/badge/language-swift-blue.svg)](#) 
 [![cocoapods](https://img.shields.io/badge/cocoapods-supported-4BC51D.svg?style=plastic)](https://cocoapods.org/pods/JXPatternLock)
+[![carthage](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage/)
 [![support](https://img.shields.io/badge/support--ios-iOS9%2B-orange.svg)](#) 
 
 An easy-to-use, powerful, customizable pattern lock view in swift. 图形解锁／手势解锁 / 手势密码 / 图案密码 / 九宫格密码
@@ -76,7 +77,7 @@ config.errorDisplayDuration = 1
 ```
 
 #### 方式二：新建实现`PatternLockViewConfig`协议的类
-该方式可以将所有配置细节聚集到自定义类的内部，外部只需要初始化自定义类即可。详情请参考demo里面的`ArrowConfig`类。这样有个好处就是，多个地方都需要用到同样配置的时候，只需要初始化相同的类，而不用像使用`LockConfig`那样，复制需要属性配置代码。
+该方式可以将所有配置细节聚集到自定义类的内部，外部只需要初始化自定义类即可。详情请参考demo里面的`ArrowConfig`类。这样有个好处就是，多个地方都需要用到同样配置的时候，只需要初始化相同的类，而不用像使用`LockConfig`那样，复制属性配置代码。
 ```Swift
 struct ArrowConfig: PatternLockViewConfig {
     var matrix: Matrix = Matrix(row: 3, column: 3)
