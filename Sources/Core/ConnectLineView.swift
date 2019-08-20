@@ -133,7 +133,6 @@ open class ConnectLineView: UIView, ConnectLine {
         trianglePath.move(to: CGPoint(x: triangleOffset, y: 0))
         trianglePath.addLine(to: CGPoint(x: triangle.bounds.width, y: triangle.bounds.height/2))
         trianglePath.addLine(to: CGPoint(x: triangleOffset, y: triangle.bounds.height))
-        trianglePath.fill()
         triangle.path = trianglePath.cgPath
         triangle.anchorPoint = CGPoint(x: 0, y: 0.5)
         triangle.frame.origin.x -= triangle.bounds.width/2
