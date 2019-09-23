@@ -10,6 +10,13 @@
 		19182ED222C5B86400389985 /* PasswordConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182ED122C5B86400389985 /* PasswordConfigViewController.swift */; };
 		19182ED422C5C04A00389985 /* SetupGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182ED322C5C04A00389985 /* SetupGuideViewController.swift */; };
 		19182ED622C5DBC700389985 /* PasswordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19182ED522C5DBC700389985 /* PasswordManager.swift */; };
+		195AC3BC233893C100181212 /* fishRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 195AC3B5233893C100181212 /* fishRed.png */; };
+		195AC3BD233893C100181212 /* emoji3.png in Resources */ = {isa = PBXBuildFile; fileRef = 195AC3B6233893C100181212 /* emoji3.png */; };
+		195AC3BE233893C100181212 /* arrowRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 195AC3B7233893C100181212 /* arrowRed.png */; };
+		195AC3BF233893C100181212 /* fish.png in Resources */ = {isa = PBXBuildFile; fileRef = 195AC3B8233893C100181212 /* fish.png */; };
+		195AC3C0233893C100181212 /* emoji2.png in Resources */ = {isa = PBXBuildFile; fileRef = 195AC3B9233893C100181212 /* emoji2.png */; };
+		195AC3C1233893C100181212 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 195AC3BA233893C100181212 /* arrow.png */; };
+		195AC3C2233893C100181212 /* emoji1.png in Resources */ = {isa = PBXBuildFile; fileRef = 195AC3BB233893C100181212 /* emoji1.png */; };
 		195C3DBD22BD108100521461 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195C3DBC22BD108100521461 /* AppDelegate.swift */; };
 		195C3DBF22BD108100521461 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195C3DBE22BD108100521461 /* ViewController.swift */; };
 		195C3DC222BD108100521461 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 195C3DC022BD108100521461 /* Main.storyboard */; };
@@ -34,6 +41,13 @@
 		19182ED122C5B86400389985 /* PasswordConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordConfigViewController.swift; sourceTree = "<group>"; };
 		19182ED322C5C04A00389985 /* SetupGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupGuideViewController.swift; sourceTree = "<group>"; };
 		19182ED522C5DBC700389985 /* PasswordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordManager.swift; sourceTree = "<group>"; };
+		195AC3B5233893C100181212 /* fishRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fishRed.png; sourceTree = "<group>"; };
+		195AC3B6233893C100181212 /* emoji3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji3.png; sourceTree = "<group>"; };
+		195AC3B7233893C100181212 /* arrowRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowRed.png; sourceTree = "<group>"; };
+		195AC3B8233893C100181212 /* fish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fish.png; sourceTree = "<group>"; };
+		195AC3B9233893C100181212 /* emoji2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji2.png; sourceTree = "<group>"; };
+		195AC3BA233893C100181212 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		195AC3BB233893C100181212 /* emoji1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji1.png; sourceTree = "<group>"; };
 		195C3DB922BD108100521461 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		195C3DBC22BD108100521461 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		195C3DBE22BD108100521461 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +86,13 @@
 		19182EC022C3780E00389985 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				195AC3BA233893C100181212 /* arrow.png */,
+				195AC3B7233893C100181212 /* arrowRed.png */,
+				195AC3BB233893C100181212 /* emoji1.png */,
+				195AC3B9233893C100181212 /* emoji2.png */,
+				195AC3B6233893C100181212 /* emoji3.png */,
+				195AC3B8233893C100181212 /* fish.png */,
+				195AC3B5233893C100181212 /* fishRed.png */,
 				19879E9522D4A3CA00767E2E /* jinitaimei.jpg */,
 			);
 			path = Image;
@@ -197,9 +218,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				195AC3C0233893C100181212 /* emoji2.png in Resources */,
 				19879E9622D4A3CA00767E2E /* jinitaimei.jpg in Resources */,
+				195AC3C2233893C100181212 /* emoji1.png in Resources */,
 				195C3DC722BD108400521461 /* LaunchScreen.storyboard in Resources */,
+				195AC3C1233893C100181212 /* arrow.png in Resources */,
+				195AC3BD233893C100181212 /* emoji3.png in Resources */,
 				195C3DC422BD108400521461 /* Assets.xcassets in Resources */,
+				195AC3BC233893C100181212 /* fishRed.png in Resources */,
+				195AC3BF233893C100181212 /* fish.png in Resources */,
+				195AC3BE233893C100181212 /* arrowRed.png in Resources */,
 				195C3DC222BD108100521461 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
