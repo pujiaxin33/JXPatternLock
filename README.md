@@ -124,7 +124,7 @@ view.addSubview(lockView)
 
 完全遵从面对协议开发。
 `PatternLockView`依赖于配置协议`PatternLockViewConfig`。
-配置协议配置网格协议`PatternLockGrid`和连接线协议`ConnectLine`。
+`PatternLockViewConfig`依赖配置网格协议`PatternLockGrid`和连接线协议`ConnectLine`。
 
 ## 补充
 
