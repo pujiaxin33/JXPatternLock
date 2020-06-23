@@ -21,10 +21,10 @@ struct GrayRoundConfig: PatternLockViewConfig {
     init() {
         initGridClosure = {(matrix) -> PatternLockGrid in
             let gridView = GridView()
-            let outerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: colorWithRGBA(r: 18, g: 143, b: 235, a: 0.3), error: UIColor.red.withAlphaComponent(0.3))
-            gridView.outerRoundConfig = RoundConfig(radius: 33, lineWidthStatus: nil, lineColorStatus: nil, fillColorStatus: outerFillColorStatus)
+            let outerFillColorStatus = GridPropertyStatus<UIColor>(connect: colorWithRGBA(r: 18, g: 143, b: 235, a: 0.3), error: UIColor.red.withAlphaComponent(0.3))
+            gridView.outerRoundConfig = RoundConfig(radius: 33, fillColorStatus: outerFillColorStatus)
             let innerFillColorStatus = GridPropertyStatus<UIColor>(normal: .lightGray, connect: colorWithRGBA(r: 18, g: 143, b: 235, a: 1), error: .red)
-            gridView.innerRoundConfig = RoundConfig(radius: 10, lineWidthStatus: nil, lineColorStatus: nil, fillColorStatus: innerFillColorStatus)
+            gridView.innerRoundConfig = RoundConfig(radius: 10, fillColorStatus: innerFillColorStatus)
             return gridView
         }
         let lineView = ConnectLineView()

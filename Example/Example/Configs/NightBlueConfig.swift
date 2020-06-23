@@ -22,12 +22,12 @@ struct NightBlueConfig: PatternLockViewConfig {
         let tintColor = colorWithRGBA(r: 18, g: 106, b: 152, a: 1)
         initGridClosure = {(matrix) -> PatternLockGrid in
             let gridView = GridView()
-            let outerFillColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: UIColor.black.withAlphaComponent(0.3), error: UIColor.red.withAlphaComponent(0.3))
-            let outerStrokeColorStatus = GridPropertyStatus<UIColor>(normal: nil, connect: tintColor, error: .red)
+            let outerFillColorStatus = GridPropertyStatus<UIColor>(connect: UIColor.black.withAlphaComponent(0.3), error: UIColor.red.withAlphaComponent(0.3))
+            let outerStrokeColorStatus = GridPropertyStatus<UIColor>(connect: tintColor, error: .red)
             let outerStrokeLineWidthStatus = GridPropertyStatus<CGFloat>.init(normal: 2, connect: 2, error: 2)
             gridView.outerRoundConfig = RoundConfig(radius: 33, lineWidthStatus: outerStrokeLineWidthStatus, lineColorStatus: outerStrokeColorStatus, fillColorStatus: outerFillColorStatus)
             let innerFillColorStatus = GridPropertyStatus<UIColor>(normal: .white, connect: .white, error: .red)
-            gridView.innerRoundConfig = RoundConfig(radius: 10, lineWidthStatus: nil, lineColorStatus: nil, fillColorStatus: innerFillColorStatus)
+            gridView.innerRoundConfig = RoundConfig(radius: 10, fillColorStatus: innerFillColorStatus)
             return gridView
         }
         let lineView = ConnectLineView()

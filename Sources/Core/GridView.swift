@@ -14,12 +14,12 @@ import UIKit
 /// 不显示圆的Line时，把lineWidthStatus设置为nil即可。
 /// fillColor更精细的配置示例：normal状态不显示，connect状态显示blue，error状态显示red。代码为：`GridPropertyStatus<UIColor>.init(normal: nil, connect: .blue, error: .red)`
 public struct RoundConfig {
-    public var radius: CGFloat?
-    public var lineWidthStatus: GridPropertyStatus<CGFloat>?
-    public var lineColorStatus: GridPropertyStatus<UIColor>?
-    public var fillColorStatus: GridPropertyStatus<UIColor>?
+    public let radius: CGFloat?
+    public let lineWidthStatus: GridPropertyStatus<CGFloat>?
+    public let lineColorStatus: GridPropertyStatus<UIColor>?
+    public let fillColorStatus: GridPropertyStatus<UIColor>?
 
-    public init(radius: CGFloat?, lineWidthStatus: GridPropertyStatus<CGFloat>?, lineColorStatus: GridPropertyStatus<UIColor>?, fillColorStatus: GridPropertyStatus<UIColor>?) {
+    public init(radius: CGFloat? = nil, lineWidthStatus: GridPropertyStatus<CGFloat>? = nil, lineColorStatus: GridPropertyStatus<UIColor>? = nil, fillColorStatus: GridPropertyStatus<UIColor>? = nil) {
         self.radius = radius
         self.lineWidthStatus = lineWidthStatus
         self.lineColorStatus = lineColorStatus
@@ -27,7 +27,7 @@ public struct RoundConfig {
     }
 
     /// 类属性，所有状态都不显示的时候使用
-    static public var empty: RoundConfig { return RoundConfig.init(radius: nil, lineWidthStatus: nil, lineColorStatus: nil, fillColorStatus: nil) }
+    static public var empty = RoundConfig()
 }
 
 open class GridView: UIView, PatternLockGrid {

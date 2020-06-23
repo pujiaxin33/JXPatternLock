@@ -27,7 +27,7 @@ public struct Matrix: Equatable {
 /// Grid不同的状态显示不同的参数
 public struct GridPropertyStatus<T> {
     public private(set) var map: [GridStatus: T] = [GridStatus: T]()
-    public init(normal: T?, connect: T?, error: T?) {
+    public init(normal: T? = nil, connect: T? = nil, error: T? = nil) {
         map[.normal] = normal
         map[.connect] = connect
         map[.error] = error
@@ -37,7 +37,7 @@ public struct GridPropertyStatus<T> {
 /// ConnectLine不同的状态显示不同的参数
 public struct ConnectLinePropertyStatus<T> {
     public private(set) var map: [ConnectLineStatus: T] = [ConnectLineStatus: T]()
-    public init(normal: T?, error: T?) {
+    public init(normal: T? = nil, error: T? = nil) {
         map[.normal] = normal
         map[.error] = error
     }
